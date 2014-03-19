@@ -1,0 +1,256 @@
+div.footer
+{
+  height: 50px;
+  background-color: black;
+  color: white;
+  line-height: 50px;
+  padding: 0px;
+}
+
+.footer a 
+{
+  color: white;
+}
+
+.footer p
+{
+  margin: 0px;
+}
+div.navbar
+{
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+div.navbar-inverse
+{
+  color: white;
+  border: none;
+}
+
+div.fixed-top
+{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+}
+
+div.navbar ul.nav
+{
+  display: inline-block;
+  float: none;
+}
+
+ul.nav > li 
+{
+  line-height: inherit;
+  padding: 0px 10px 0px 5px;
+  display: inline;
+}
+
+ul.nav > li > a
+{
+  display: inline;
+  color: inherit;
+}
+
+ul.nav > li > a:hover
+{
+  background-color: inherit;
+  color: #0099FF;
+}
+
+.icon-med
+{
+  font-size: 20px;
+}
+
+div.section
+{
+  text-align: center;
+  padding: 30px 10px 0px 10px;
+  text-align: left;
+}
+
+div.header
+{
+  max-height: 300px;
+  text-align: center;
+  position: fixed;
+  right: 0px;
+  left: 0px;
+  top: 50px;
+}
+
+div.back
+{
+  z-index: -1000;
+}
+
+p.name
+{
+  text-transform: uppercase;
+  color: white;
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0px;
+  margin: 0px;
+}
+
+p.subtitle
+{
+  color: white;
+  font-size: 15px;
+  padding: 0px;
+  margin: 0px;
+}
+
+div#title
+{
+/*  background-image:url("../img/brandenburg_gate.jpg");
+  background-position: 52.5% 38%;*/
+  background-color: #37A1E4;
+  height: 100%;
+}
+
+div.title-box
+{
+  background-color: inherit;
+}
+
+div.about
+{
+  background-color: #454747;
+  color: white;
+  text-align: justify;
+}
+
+div.experience
+{
+  background-color: white;
+}
+
+div.center
+{
+  text-align: center;
+}
+
+div.subheader
+{
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 12px;
+  text-align: left;
+}
+
+img.med-icon
+{
+  width: 100px;
+  height: 100px;
+  border: 3px solid white;
+}
+
+a.mail
+{
+  color: black;
+}
+
+p.bold
+{
+  font-weight: 400;
+  font-size: 16px;
+  margin: 0;
+}
+
+ul.job_description
+{
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+p.job_time
+{
+  font-weight: 400;
+}
+
+p.italics
+{
+  font-style: italic;
+}
+
+div.section > .container > .row
+{
+  padding-bottom: 15px;
+}
+
+div.education
+{
+  background-color: #8C1515;
+  color: white;
+}
+
+span.show-xs
+{
+  display: none;
+}
+
+span.hide-xs
+{
+  display: inline;
+}
+
+
+@media (max-width: 767px) {
+  span.hide-xs {
+    display: none;
+  }
+  span.show-xs {
+    display: inline;
+  }
+  ul.nav {
+    margin-top: 4px;
+  }
+  div.job-interval {
+    text-align: left;
+  }
+}
+
+ul.class_list
+{
+  list-style: none;
+  padding-left: 0px;
+}
+
+p.list_header
+{
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.container > .row
+{
+  margin: 0px;
+}
+
+.anchor
+{
+  display: block;
+  height: 50px;
+  margin-top: -50px;
+  visibility: hidden;
+}
+
+body
+{
+  padding-top: 300px;
+  font-family: "Open Sans";
+  font-size: 13px;
+  letter-spacing: 1px;
+  font-weight: 100;
+  overflow-x: hidden;
+}
