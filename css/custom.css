@@ -194,6 +194,11 @@ div.education
   color: white;
 }
 
+div.projects
+{
+  background-color: white;
+}
+
 span.show-xs
 {
   display: none;
