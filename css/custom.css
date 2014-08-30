@@ -1,15 +1,12 @@
 div.footer
 {
   height: 50px;
-  background-color: black;
-  color: white;
   line-height: 50px;
   padding: 0px;
 }
 
 .footer a 
 {
-  color: white;
 }
 
 .footer p
@@ -29,14 +26,6 @@ div.navbar-inverse
 {
   color: white;
   border: none;
-}
-
-div.fixed-top
-{
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  left: 0px;
 }
 
 div.navbar ul.nav
@@ -80,10 +69,6 @@ div.header
 {
   max-height: 300px;
   text-align: center;
-  position: fixed;
-  right: 0px;
-  left: 0px;
-  top: 50px;
 }
 
 div.back
@@ -91,31 +76,28 @@ div.back
   z-index: -1000;
 }
 
-p.name
+div.header p
+{
+  padding: 0;
+  margin: 0;
+}
+
+p.header
 {
   text-transform: uppercase;
-  color: white;
-  font-size: 40px;
+  font-size: 60px;
   font-weight: 600;
   letter-spacing: 1px;
-  padding: 0px;
-  margin: 0px;
 }
 
 p.subtitle
 {
-  color: white;
   font-size: 15px;
-  padding: 0px;
-  margin: 0px;
 }
 
-div#title
+div.header
 {
-/*  background-image:url("../img/brandenburg_gate.jpg");
-  background-position: 52.5% 38%;*/
-  background-color: #37A1E4;
-  height: 100%;
+  height: 300px;
 }
 
 div.title-box
@@ -125,14 +107,11 @@ div.title-box
 
 div.about
 {
-  background-color: #454747;
-  color: white;
   text-align: justify;
 }
 
 div.experience
 {
-  background-color: white;
 }
 
 div.center
@@ -190,13 +169,10 @@ div.section > .container > .row
 
 div.education
 {
-  background-color: #8C1515;
-  color: white;
 }
 
 div.projects
 {
-  background-color: white;
 }
 
 span.show-xs
@@ -252,7 +228,6 @@ p.list_header
 
 body
 {
-  padding-top: 300px;
   font-family: "Open Sans";
   font-size: 13px;
   letter-spacing: 1px;
