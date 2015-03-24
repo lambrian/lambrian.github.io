@@ -238,3 +238,8 @@ body
   font-weight: 100;
   overflow-x: hidden;
 }
+
+.container
+{
+    max-width: 800px;
+}
