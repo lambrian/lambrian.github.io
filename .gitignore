@@ -1,0 +1,6 @@
+# JEKYLL TEMP FILES
+_example-posts/
+
+# DEVELOPMENT FILES
+_site/
+.sass-cache/
