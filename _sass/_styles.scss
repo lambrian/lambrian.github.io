@@ -21,6 +21,7 @@ p {
 
 a, a:visited, a:active {
     color: $link;
+    text-decoration: underline;
 }
 
 a:hover {
