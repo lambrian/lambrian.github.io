@@ -21,7 +21,6 @@ p {
 
 a, a:visited, a:active {
     color: $link;
-    text-decoration: underline;
 }
 
 a:hover {
@@ -415,6 +414,10 @@ header.site-header nav {
     
     min-height: 500px;
     
+    a {
+        text-decoration: underline;
+    }
+
     .deets {
         position: relative;
         top: 45px;
