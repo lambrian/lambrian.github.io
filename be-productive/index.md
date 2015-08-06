@@ -1,16 +1,11 @@
 ---
 layout: post-no-feature
-title: "Stop Going to ____"
+title: "Be More Productive"
 description: "There are better things you can be doing. Like below."
 category: personal
 tags: []
 ---
 
-* Catch up on your reading
-    1. Like Pocket
-    2. XKCD Comics
-    3. SMBC Comics
-    4. OGLAF
-    5. Medium
-* Look at some Exposure posts
+* Catch up on your reading on [Pocket](//getpocket.com)
+* Look at some [Exposure](//featured.exposure.co) posts
 * Stretch
