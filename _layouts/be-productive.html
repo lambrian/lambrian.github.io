@@ -51,7 +51,7 @@
 </div>
 {% include scripts.html %}
 <script>
-    $.getJSON( "//pagehits.herokuapp.com/increment-count", {pageId: '55d7fc58dbde33030040730f'}, function( data ) {
+    $.getJSON( "//pagehits.herokuapp.com/increment-count?pageId=55d7fc58dbde33030040730f", function( data ) {
         $('#hit-number').html(data.hits);
         $('#hit-suffix').html(data.suffix);
     });
