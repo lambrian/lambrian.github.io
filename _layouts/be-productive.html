@@ -1,10 +1,10 @@
 {% if page.image.feature %}
 
-{% include head-dark.html %}
+{% include head.html %}
 
 <section class="article">
 
-  <div class="overlay overlay-lighter"></div>
+  <div class="overlay"></div>
   <div class="featured-image" style="background-image: url({{ site.url }}/images/{{ page.image.feature }})"></div>
 {% else %}
 
@@ -19,6 +19,7 @@
         <header class="post-header">
           <hgroup>
             <h1>{{page.title}}</h1>
+            <p>This is the <span id="hit-number"></span><span id="hit-suffix"></span> time you reached this page.</p>
             <p class="date">{{page.date | date: "%b %d, %Y" }}</p>
             <p class="intro">{% if page.description %}{{ page.description }}{% else %}{{ page.tagline }}{% endif %}</p>
           </hgroup>
@@ -48,5 +49,10 @@
       </article>
     </section>
 </div>
-
-{% include footer.html %}
+{% include scripts.html %}
+<script>
+    $.getJSON( "//pagehits.herokuapp.com/increment-count", {pageId: '55d7fc58dbde33030040730f'}, function( data ) {
+        $('#hit-number').innerHTML = data.hits;
+        $('#hit-suffix').innerHTML = data.suffix;
+    });
+</script>
