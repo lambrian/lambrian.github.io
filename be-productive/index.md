@@ -1,5 +1,5 @@
 ---
-layout: post-no-feature
+layout: plain
 title: "Be More Productive"
 description: "There are better things you can be doing. Like below."
 category: personal
