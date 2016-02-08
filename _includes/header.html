@@ -1,7 +1,7 @@
 <header class="site-header">
 <div class="wrapper">
-    <a class="site-title center" href="{{ site.baseurl }}/">
-        <img src="img/site-pic.jpg" class="site-pic center" />
+    <a class="site-title center" href="{{ site.baseurl }}">
+        <img src="{{"/img/site-pic.jpg" | prepend: site.baseurl }}" class="site-pic center" />
         <p class="center">{{ site.title }}</p>
     </a>
     <p class="site-subtitle center">
