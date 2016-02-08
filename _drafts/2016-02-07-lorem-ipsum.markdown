@@ -1,10 +1,10 @@
 ---
-layout: blog-post
+layout: post
 title: "Lorem Ipsum"
 date: 2016-02-07 17:46:00 -0800
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eu libero
+[Lorem ipsum dolor sit amet](hi), consectetur adipiscing elit. Quisque eu libero
 tortor. Sed ultricies odio arcu, sit amet ullamcorper sapien accumsan eget. Cras
 velit libero, aliquet ac mauris ac, pretium efficitur diam. Proin in feugiat
 sem, a ullamcorper diam. Praesent laoreet lorem in ante ultricies, nec hendrerit

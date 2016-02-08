@@ -171,6 +171,17 @@ pre {
     max-width: 650px;
 }
 
+.post-content  a {
+    color: $text-color;
+    border-bottom: 2px solid $grey-color-light;
+    border-radius: 1px;
+
+    &:hover {
+        border-bottom: 2px solid $grey-color-dark;
+    }
+}
+
+
 
 /**
  * Clearfix
