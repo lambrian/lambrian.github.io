@@ -25,6 +25,10 @@ a {
  Site header
  */
 
+.header {
+    max-width: 550px;
+}
+
 .site-header {
     margin: 100px 0;
     min-height: 56px;
@@ -42,6 +46,19 @@ a {
 
     p {
         color: $brand-color;
+    }
+}
+
+.site-subtitle {
+    a {
+        color: $text-color;
+        border-bottom: 2px solid $grey-color-light;
+        border-radius: 1px;
+        
+        &:hover {
+            color: $text-color;
+            border-bottom: 2px solid $grey-color-dark;
+        }
     }
 }
 
