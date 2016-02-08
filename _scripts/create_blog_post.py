@@ -4,13 +4,18 @@ import os
 import sys
 from datetime import datetime 
 
+
+HOME_DIR = os.path.expanduser('~')
+REPO_DIR = HOME_DIR + "/Developer/lambrian.github.io"
+
 def create_file():
     now = datetime.now()
     title = sys.argv[1].lower().replace(" ", "-")
     filename = "%s-%s.markdown" % (now.strftime("%Y-%m-%d"), title)
 
-    filepath = "../_drafts/%s" % filename
+    filepath = REPO_DIR + "/_drafts/%s" % filename
     if (os.path.isfile(filepath)):
+        print "%s already exists." % filename
         return
 
     f = open(filepath, "w+")
