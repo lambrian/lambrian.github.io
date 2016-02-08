@@ -6,4 +6,4 @@ _site/
 .sass-cache/
 
 # Local
-.DS_Store
+*.DS_Store

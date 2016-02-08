@@ -74,6 +74,38 @@ a {
     color: $brand-color;
 }
 
+.media-list {
+    margin-top: 25px;
+    list-style: none;
+    width: 208px;
+
+    li {
+        float: left;
+    }
+}
+
+.icon {
+    height: 32px;
+    width: 32px;
+    margin: 10px;
+}
+
+.icon-facebook {
+    background-image: url('../img/icon-facebook.svg');
+}
+
+.icon-twitter {
+    background-image: url('../img/icon-twitter.svg');
+}
+
+.icon-instagram {
+    background-image: url('../img/icon-instagram.svg');
+}
+
+.icon-github {
+    background-image: url('../img/icon-github.svg');
+}
+
 /**
  * Site footer
  */

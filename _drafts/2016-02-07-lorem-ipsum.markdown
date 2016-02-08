@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: blog-post
 title: "Lorem Ipsum"
 date: 2016-02-07 17:46:00 -0800
 ---
