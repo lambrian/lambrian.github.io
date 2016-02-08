@@ -4,3 +4,6 @@ _example-posts/
 # DEVELOPMENT FILES
 _site/
 .sass-cache/
+
+# Local
+.DS_Store
