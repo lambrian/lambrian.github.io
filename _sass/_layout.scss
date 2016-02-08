@@ -7,12 +7,26 @@
     text-align: center;
 }
 
+a {
+    &:hover {
+        text-decoration: none;
+    }
+
+    &:visited {
+        color: black;
+    }
+
+    &:visited:hover {
+        color: $brand-color;
+    }
+}
+
 /**
  Site header
  */
 
 .site-header {
-    margin-top: 100px;
+    margin: 100px 0;
     min-height: 56px;
 }
 
@@ -24,19 +38,20 @@
     margin-bottom: 0;
     text-transform: uppercase;
     letter-spacing: .1em;
+    color: $brand-color;
 
-    &,
-    &:visited {
-        color: $grey-color-dark;
+    p {
+        color: $brand-color;
     }
 }
 
 .site-pic {
-    border: 3px solid $brand-color;
+    border: 5px solid $brand-color;
     width: 100px;
     height: 100px;
     border-radius: 50%;
     display: block;
+    padding: 5px;
 }
 
 /**
@@ -121,6 +136,7 @@
     text-transform: uppercase;
     letter-spacing: 1.5px;
     font-weight: 500;
+    color: $brand-color;
 }
 
 .post-list {
@@ -139,7 +155,9 @@
 
 .post-link {
     display: block;
-    font-size: 24px;
+    font-size: 30px;
+    color: black;
+    font-weight: 600;
 }
 
 
