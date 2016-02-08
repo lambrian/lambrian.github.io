@@ -54,6 +54,25 @@ a {
     padding: 5px;
 }
 
+.banner {
+    padding: 20px;
+}
+
+.banner-pic {
+    height: 25px;
+    border-radius: 50%;
+    display: inline;
+    padding: 3px;
+    border: 2px solid $brand-color;
+}
+
+.banner-title {
+    font-size: 17px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 /**
  * Site footer
  */
