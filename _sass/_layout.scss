@@ -62,6 +62,18 @@ a {
     }
 }
 
+
+p a {
+  color: $text-color;
+  border-bottom: 2px solid $grey-color-light;
+  border-radius: 1px;
+
+  &:hover {
+    color: $text-color;
+    border-bottom: 2px solid $grey-color-dark;
+  }
+}
+
 .site-pic {
     border: 5px solid $brand-color;
     width: 100px;
