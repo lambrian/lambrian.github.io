@@ -71,8 +71,13 @@ a {
     padding: 5px;
 }
 
+.title {
+  font-family: $base-font-family-sans-serif;
+}
+
 .banner {
-    padding: 20px;
+  font-family: $base-font-family-sans-serif;
+  padding: 20px;
 }
 
 .banner-pic {
@@ -277,7 +282,6 @@ a {
 }
 
 .cover-photo {
-  min-width: 200%;
-  position: relative;
-  left: -50%;
+  position: absolute;
+  left: 0;
 }
