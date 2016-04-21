@@ -4,7 +4,7 @@ title: 'Making "Music in March"'
 date: 2016-04-21 00:00:01 -0800
 ---
 
-Music in March is the second of my monthly recap infographics. The final result is [here](/2016/04/11/march-music.html).
+Music in March is the second of my monthly recap infographics. The final result is [here](/2016/04/12/march-music.html).
 
 I wanted to do something that would be tracked automatically without any additional effort because that was the only way I could guarantee the data would be accurate. I chose music after deciding there were interesting possibilities for the data and verifying that methods for collecting the data automatically existed. I followed the same process as Places in February - ideation, setup, data collection and analysis, and design iteration.
 
