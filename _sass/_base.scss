@@ -297,16 +297,20 @@ Site header
   }
 }
 
-.condensed-banner {
-  border: 2px solid $brand-color;
-  border-radius: 50%;
-  color: $brand-color;
-  padding: 5px;
+.condensed-banner-container {
   display: none;
 
   @include media-query($on-laptop) {
     display: inline;
   }
+}
+
+.condensed-banner {
+  border: 2px solid $brand-color;
+  border-radius: 50%;
+  color: $brand-color;
+  display: inline;
+  padding: 5px;
 }
 
 .banner-pic {
