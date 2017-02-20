@@ -9,5 +9,4 @@ I wanted to strengthen my skills in data visualization and design, so how better
 than to learn by doing. First installment, I tracked all the places I went in
 February.
 
-<img class="cover-photo" src="/img/charts/february-2016.png" />
-
+<img src="/img/charts/february-2016.png" />

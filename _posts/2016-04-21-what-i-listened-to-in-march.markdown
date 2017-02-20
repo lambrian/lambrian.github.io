@@ -1,10 +1,11 @@
 ---
 layout: post
-title: 'Making "Music in March"'
+title: What I Listened to in March
 date: 2016-04-21 00:00:01 -0800
 ---
 
-Music in March is the second of my monthly recap infographics. The final result is [here](/2016/04/12/march-music.html).
+<img src="/img/charts/march-2016.png" />
+Music in March is the second of my monthly recap infographics.
 
 I wanted to do something that would be tracked automatically without any additional effort because that was the only way I could guarantee the data would be accurate. I chose music after deciding there were interesting possibilities for the data and verifying that methods for collecting the data automatically existed. I followed the same process as Places in February - ideation, setup, data collection and analysis, and design iteration.
 
@@ -61,7 +62,7 @@ The most frustrating part of the data collection process was making the jump fro
 
 Getting the track ID was non-obvious and required a few iterations to get right.
 
-##### Iteration 1: Naive Solution
+#### Iteration 1: Naive Solution
 
 I queried for tracks with the concatenated song , artist, and album name as the search term and took the first result.
 
@@ -69,19 +70,19 @@ I queried for tracks with the concatenated song , artist, and album name as the 
 
 *Issue 2*: The search query was sometimes too specific, causing the query to return with no results. For example, compilation albums with multiple artists did not do well with this search query.
 
-##### ITERATION 2: Smarter Search Result Selection
+#### Iteration 2: Smarter Search Result Selection
 
 To fix the incorrect top result issue, I queried the top 10 results and chose the result whose name matched the song title being queried.
 
 Issue: Names with special characters seemed to be logged to Last.fm a little differently than saved in Spotify's backend, making a perfect match sometimes impossible. To fix this, I only compared the longest starting substring of non-special characters in both the song title and the search result title.
 
-##### ITERATION 3: Search Term Restructuring
+#### Iteration 3: Search Term Restructuring
 
 To fix the no results issue, if an initial query had no results, I retried with just the song and artist name, and then finally just then name, performing the name match each time to verify results.
 
 Since Spotify's track information didn't provide satisfying metadata about the track's genre or artists, I would have to dive into ambiguous territory of querying external databases for that information. Instead, I narrowed the scope of my project to my personal listening habits; the data I now had available was already interesting, and I was not prepared to multiple the complexity of the project. 
 
-## Design Iteration
+### Design Iteration
 
 Since I want to print these on the Risograph, I designed with the constraints of that medium in mind; tabloid print size (11 x 17 in) with a safe half inch margin and minimal color variety.
 
@@ -129,13 +130,13 @@ In the context of the graphs, the statistics were an afterthought, and it defini
 
 The vertical layout made each section more independent. I rethought the sizing and styling to reflect the hierarchy of the information that I was presenting.
 
-#### Lessons Learned
+### Lessons Learned
 
 In the data collection phase, the technical limitations of Last.fm and Spotify challenged me as an engineer to get the data that I wanted. The limitations of Spotify's track information forced me to think carefully about what kind of information I wanted to show, what narrative I wanted to tell with the data I was collecting, and evaluate the costs of getting that data. In my case, I chose to cut out a whole facet of what interested me in order to present a clearer focus, reduce the complexity of the project without sacrificing completeness, and maintain the fidelity of the data.
 
 
 
-*Tools used*
+### Tools used
 
 - [Spotify logged to Last.fm](https://support.spotify.com/us/learn-more/faq/#!/article/scrobble-to-last-fm)
 - IFTTT to log Last.fm logs to Google Sheet __(Support Removed)__
@@ -146,4 +147,3 @@ In the data collection phase, the technical limitations of Last.fm and Spotify c
 - [Spotify Track Information API Endpoint](https://developer.spotify.com/web-api/get-track/)
 - [Last.fm API](http://www.last.fm/api/show/user.getRecentTracks)
 - [Postman](https://www.getpostman.com/)
-

@@ -1,21 +1,19 @@
 ---
-layout: blog-index
+layout: plain
 ---
-
 <div class="home">
-
-  <h1 class="page-heading">Most Recent Posts</h1>
-
   <ul class="post-list">
     {% for post in site.posts %}
       <li>
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-        {{ post.excerpt }}
+        <div class="post-link">
+          <a class="post-link-title" href="{{ post.url | prepend: site.baseurl }}">
+            {{ post.title }}
+          </a>
+          <div class="post-link-date">
+            {{ post.date | date: "%B %-d, %Y" }}
+          <div>
+        </div>
       </li>
     {% endfor %}
   </ul>
-
-
 </div>
