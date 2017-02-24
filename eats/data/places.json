@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Los Angeles Home",
+    "address": "5319 Garypark Ave, Arcadia"
+  },
+  {
+    "name": "San Francisco Home",
+    "address": "248 Missouri St, San Francisco"
+  },
+  {
+    "name": "Marks House",
+    "address": "630 Castro St, San Francisco"
+  },
+  {
+    "name": "Burma Love",
+    "address": "211 Valencia St, San Francisco, CA 94103"
+  },
+  {
+    "name": "Woodhouse Fish Co.",
+    "address": "2073 Market St, San Francisco, CA 94114"
+  },
+  {
+    "name": "Osaka Sushi",
+    "address": "460 Castro St, San Francisco, CA 94114"
+  }
+]
