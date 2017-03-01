@@ -6,11 +6,12 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Brian Lam
+name: Brian Lam
+title: Brian Lam // Engineer
 email: brianlam93@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Hi, I'm Brian Lam. I am a software engineer at Facebook. Previously, I was a
-  student at Stanford University. I live and work in San Francisco. I am not
+  student at Stanford University. I live and work in San Francisco.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://brianlam.io" # the base hostname & protocol for your site
 twitter_username: _brianlam
@@ -18,3 +19,4 @@ github_username:  lambrian
 
 # Build settings
 markdown: kramdown
+destination: "/var/www/html/brianlam.io/public_html/"
