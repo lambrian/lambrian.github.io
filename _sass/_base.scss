@@ -221,10 +221,9 @@ General
 a {
   color: $text-color;
   font-weight: $heavy-font-weight;
-  text-decoration: none;
 
   &:hover {
-    text-decoration: none;
+    background-color: orange;
   }
 
   &:visited {
@@ -327,6 +326,7 @@ Site header
   text-transform: uppercase;
   letter-spacing: 1px;
   color: $brand-color;
+  text-decoration: none;
 }
 
 .nav-bar-container {
