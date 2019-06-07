@@ -7,4 +7,4 @@ I wanted to strengthen my skills in data visualization and design, so how better
 than to learn by doing. First installment, I tracked all the places I went in
 February.
 
-<img src="/img/charts/february-2016.png" />
+![Poster of all locations in February](/img/charts/february-2016.png)

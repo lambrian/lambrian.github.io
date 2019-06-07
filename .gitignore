@@ -5,5 +5,9 @@ _example-posts/
 _site/
 .sass-cache/
 
+# ASSETS
+img/
+
 # Local
 *.DS_Store
+*.swp
