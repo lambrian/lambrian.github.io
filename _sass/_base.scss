@@ -223,7 +223,7 @@ a {
   font-weight: $heavy-font-weight;
 
   &:hover {
-    background-color: orange;
+    background-color: #FFD70;
   }
 
   &:visited {
@@ -288,6 +288,10 @@ Site header
 .banner {
   font-family: $base-font-family-sans-serif;
   padding: 20px;
+
+  a {
+    text-decoration: none;
+  }
 }
 
 .full-banner {
@@ -449,11 +453,32 @@ Site header
 /**
  * Posts Table of Contents
  */
+.category-section {
+  color: $grey-color-dark;
+
+  .category-title {
+    color: $grey-color-dark;
+    font-family: $base-font-family-sans-serif;
+    font-size: 24px;
+    margin: 12px 0;
+  }
+}
+
+.category-divider {
+  border-top: 1px solid $grey-color-light;
+}
+
 .post-link {
   .post-link-title {
     color: $grey-color-dark;
     font-size: $large-font-size;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
+
 
   .post-link-date {
     color: $grey-color;
