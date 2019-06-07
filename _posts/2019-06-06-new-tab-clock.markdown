@@ -2,6 +2,7 @@
 layout: post
 title: Clock New Tab Chrome Extension
 date: 2019-06-05 22:16:05 -0800
+category: [Projects]
 ---
 
 I built this little widget when the Chrome extension

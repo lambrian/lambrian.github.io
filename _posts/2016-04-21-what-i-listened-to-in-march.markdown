@@ -2,6 +2,7 @@
 layout: post
 title: What I Listened to in March
 date: 2016-04-21 00:00:01 -0800
+category: [Projects]
 ---
 
 <img src="/img/charts/march-2016.png" />

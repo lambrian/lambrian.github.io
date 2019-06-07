@@ -2,6 +2,7 @@
 layout: post
 title: Write in 2016
 date: 2016-02-07 22:16:05 -0800
+category: [Thoughts]
 ---
 
 There are many reasons to write, I hear. Most recently, I read [this
