@@ -15,7 +15,7 @@ select one to display. For the clock, in addition to the time and date, I
 visualized the progress of the current quarter, half, and year as rings around
 the clock. 
 
-![Example screenshot of clock and background](/img/new-tab-clock.png)
+![Example screenshot of clock and background](/img/new-tab-clock.jpg)
 
 The Chrome extension loaded the images from my Desktop; I have since removed
 them from this online version for sake of file size. Take a look [here](/day-count/).
