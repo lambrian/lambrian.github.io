@@ -223,7 +223,7 @@ a {
   font-weight: $heavy-font-weight;
 
   &:hover {
-    background-color: #FFD700;
+    background-color: $highlight-color;
   }
 
   &:visited {
@@ -291,6 +291,9 @@ Site header
 
   a {
     text-decoration: none;
+    &:hover {
+      background-color: inherit;
+    }
   }
 }
 
@@ -298,6 +301,7 @@ Site header
   @include media-query($on-laptop) {
     display: none;
   }
+
 }
 
 .condensed-banner-container {
@@ -314,6 +318,10 @@ Site header
   color: $brand-color;
   display: inline;
   padding: 5px;
+  &:hover {
+    background-color: $highlight-color;
+  }
+
 }
 
 .banner-pic {
@@ -331,6 +339,9 @@ Site header
   letter-spacing: 1px;
   color: $brand-color;
   text-decoration: none;
+  &:hover {
+    background-color: $highlight-color;
+  }
 }
 
 .nav-bar-container {
