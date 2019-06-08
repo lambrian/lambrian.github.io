@@ -286,6 +286,7 @@ Site header
 }
 
 .banner {
+  display: flex;
   font-family: $base-font-family-sans-serif;
   padding: 20px;
 
@@ -294,14 +295,6 @@ Site header
     &:hover {
       background-color: inherit;
     }
-  }
-}
-
-.full-banner {
-  display: flex;
-
-  @include media-query($on-laptop) {
-    display: none;
   }
 
   .banner-pic {
@@ -322,33 +315,30 @@ Site header
     &:hover {
       background-color: $highlight-color;
     }
+
+    @include media-query($on-laptop) {
+      display: none;
+    }
   }
 }
 
 .banner-icon {
   margin-right: 4px;
-}
-
-.condensed-banner-container {
-  display: none;
-
-  @include media-query($on-laptop) {
-    display: inline;
-  }
-}
-
-.condensed-banner {
   border: 2px solid $brand-color;
   border-radius: 50%;
-  color: $brand-color;
+}
+
+.banner-icon-content {
   height: 24px;
   padding: 4px;
   width: 24px;
   display: flex;
   justify-content: center;
 
-  &:hover {
-    background-color: $highlight-color;
+  @include media-query($on-laptop) {
+    &:hover {
+      background-color: $highlight-color;
+    }
   }
 }
 
