@@ -326,6 +326,12 @@ Site header
   margin-right: 4px;
   border: 2px solid $brand-color;
   border-radius: 50%;
+
+  @include media-query($on-laptop) {
+    &:hover {
+      background-color: $highlight-color;
+    }
+  }
 }
 
 .banner-icon-content {
@@ -334,12 +340,6 @@ Site header
   width: 24px;
   display: flex;
   justify-content: center;
-
-  @include media-query($on-laptop) {
-    &:hover {
-      background-color: $highlight-color;
-    }
-  }
 }
 
 .condensed-banner-title {
