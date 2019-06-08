@@ -298,10 +298,35 @@ Site header
 }
 
 .full-banner {
+  display: flex;
+
   @include media-query($on-laptop) {
     display: none;
   }
 
+  .banner-pic {
+    border-radius: 50%;
+
+    @include media-query($on-laptop) {
+      display: none;
+    }
+  }
+
+  .banner-title {
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $brand-color;
+    text-decoration: none;
+    &:hover {
+      background-color: $highlight-color;
+    }
+  }
+}
+
+.banner-icon {
+  margin-right: 4px;
 }
 
 .condensed-banner-container {
@@ -316,32 +341,27 @@ Site header
   border: 2px solid $brand-color;
   border-radius: 50%;
   color: $brand-color;
-  display: inline;
-  padding: 5px;
+  height: 24px;
+  padding: 4px;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+
   &:hover {
     background-color: $highlight-color;
   }
-
 }
 
-.banner-pic {
-  height: 25px;
-  border-radius: 50%;
-  display: inline;
-  padding: 3px;
-  border: 2px solid $brand-color;
-}
+.condensed-banner-title {
+  display: none;
 
-.banner-title {
-  font-size: 19px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: $brand-color;
-  text-decoration: none;
-  &:hover {
-    background-color: $highlight-color;
+  @include media-query($on-laptop) {
+    display: inline;
   }
+}
+
+.test {
+  border: 1px solid blue;
 }
 
 .nav-bar-container {
