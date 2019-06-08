@@ -1,0 +1,7 @@
+---
+layout: default
+---
+{% for photo in site.selected_photos %}
+<div><img src="{{photo.img_link}}" alt="{{photo.alt_text}}"/></div>
+{% endfor %}
+

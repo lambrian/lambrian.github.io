@@ -19,3 +19,6 @@ github_username:  lambrian
 
 # Build settings
 markdown: kramdown
+
+collections:
+  - selected_photos
