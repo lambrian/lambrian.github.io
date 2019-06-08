@@ -4,6 +4,7 @@ _example-posts/
 # DEVELOPMENT FILES
 _site/
 .sass-cache/
+production
 
 # ASSETS
 img/
