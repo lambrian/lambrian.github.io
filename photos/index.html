@@ -1,7 +1,11 @@
 ---
-layout: default
+layout: plain
 ---
-{% for photo in site.selected_photos %}
-<div><img src="{{photo.img_link}}" alt="{{photo.alt_text}}"/></div>
-{% endfor %}
+<div class="photos-container">
+  {% for photo in site.selected_photos %}
+    <div class="selected-photo-container">
+      <img class="selected-photo" src="{{photo.img_link}}" alt="{{photo.alt_text}}"/>
+    </div>
+  {% endfor %}
+</div>
 
