@@ -14,7 +14,7 @@
       textArea.onkeyup = () => {
         const text = textArea.value;
         alien.innerHTML = text.replace(/(.)/g, '$1 ') ;
-        clapping.innerHTML = text.replace(/\s+/g, '&#x1F44F');
+        clapping.innerHTML = text.replace(/\s+/g, '<span>&#x1F44F</span>');
         spongebob.innerHTML = text.replace(/(\w)(\w)?/g, (match, p1, p2) => {
           return p1.toUpperCase() + (p2 || '').toLowerCase();
         })
