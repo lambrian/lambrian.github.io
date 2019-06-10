@@ -20,9 +20,9 @@
         );
         clapping.innerHTML = clappingText.replace(/\s+/g, '<span>&#x1F44F</span>');
         spongebob.innerHTML = text.replace(
-          /(\w)(^\w*)(\w)?/g,
+          /(\w)(\w)?/g,
           (match, p1, p2, p3) => {
-            return p1.toUpperCase() + (p3 || '').toLowerCase();
+            return p1.toLowerCase() + (p2 || '').toUpperCase();
           }
         );
       };
