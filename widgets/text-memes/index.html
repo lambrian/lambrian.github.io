@@ -1,31 +1,12 @@
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <textarea id="main-text" rows=10 cols="50"></textarea>
-    <div id="spongebob"></div>
-    <div id="clapping"></div>
-    <div id="alien"></div>
-    <script>
-      const textArea = document.getElementById('main-text');
-      const spongebob = document.getElementById('spongebob');
-      const clapping = document.getElementById('clapping');
-      const alien = document.getElementById('alien');
-      textArea.onkeyup = () => {
-        const text = textArea.value;
-        alien.innerHTML = text.replace(/(.)/g, '$1 ') ;
-        const clappingText = text.replace(
-          /(\w+)/g,
-          (m, p1) => (p1 + "").toUpperCase(),
-        );
-        clapping.innerHTML = clappingText.replace(/\s+/g, '<span>&#x1F44F</span>');
-        spongebob.innerHTML = text.replace(
-          /(\w)(\w)?/g,
-          (match, p1, p2, p3) => {
-            return p1.toLowerCase() + (p2 || '').toUpperCase();
-          }
-        );
-      };
-    </script>
+    <textarea id="main-text" rows=5 placeholder="do not come for me"></textarea>
+    <script src="main.js"></script>
   </body>
 </html>

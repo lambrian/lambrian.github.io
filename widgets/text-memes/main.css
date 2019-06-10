@@ -1,0 +1,20 @@
+* {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+body {
+  padding: 24px 12px;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+#main-text {
+  border: 3px solid lightgrey;
+  resize: none;
+  width: 100%;
+}
+
+.meme-section {
+  padding: 12px 0;
+  border-bottom: 1px solid lightgrey;
+}
