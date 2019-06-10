@@ -17,6 +17,11 @@ const memes = {
   'alien': (text) => {
     return text.replace(/(.)/g, '$1 ');
   },
+  'azn': (text) => {
+    return text
+      .replace(/boy/g, 'boi')
+      .replace(/s(\s|$)/g, 'z$1');
+  },
 };
 
 const memeSectionRefs = {};
