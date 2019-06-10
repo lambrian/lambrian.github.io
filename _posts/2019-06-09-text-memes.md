@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Text Memes
+title: Text Meme Format Generator
 date: 2019-06-09
 category: [Projects]
 ---
