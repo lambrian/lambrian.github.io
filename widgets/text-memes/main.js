@@ -20,7 +20,8 @@ const memes = {
   'azn': (text) => {
     return text
       .replace(/boy/g, 'boi')
-      .replace(/s(\s|$)/g, 'z$1');
+      .replace(/s(\s|$)/g, 'z$1')
+      .replace(/asian/ig, 'azn');
   },
 };
 
