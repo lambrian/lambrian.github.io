@@ -2,8 +2,9 @@
 layout: plain
 ---
 <div class="photos-container">
-  {% for photo in site.selected_photos %}
-    <div class="selected-photo-container">
+ {% assign sorted = (site.selected_photos | sort: 'date') | reverse %}
+ {% for photo in site.selected_photos %}
+   <div class="selected-photo-container">
       <img class="selected-photo" src="{{photo.img_link}}" alt="{{photo.alt_text}}"/>
     </div>
   {% endfor %}
