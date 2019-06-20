@@ -11,6 +11,8 @@ I live and work in San Francisco. In my free time, I like cooking, trying out
 new restaurants, drinking coffee, making cocktails for friends at home, and
 thinking about whether I am once and for all an introvert or just sleepy. I
 have also picked up climbing. I recently got back into photography - you can
-see my not so recently taken photos from Africa [here](/photos).
+see my not so recently taken photos from Africa [here](/photos). I'm currently
+working through some of my thoughts on generative artwork - you can see what I'm
+working on [here](/generative_art).
 
 I write about some of my side projects [here](/blog).
