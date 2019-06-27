@@ -282,6 +282,7 @@ Site header
 .banner {
   display: flex;
   font-family: $base-font-family-sans-serif;
+  max-width: 200px;
   padding: 20px;
 
   a {
