@@ -1,0 +1,16 @@
+I"«<p>I built this little widget when the Chrome extension
+<a href="https://chrome.google.com/webstore/detail/momentum/laookkfknpbbblfpciffpaejjkokdgca?hl=en">Momentum</a> became very
+popular. I liked the idea of having a simple clock and message against a changing,
+visually pleasing background every time I opened a new tab.</p>
+
+<p>I wanted to pull from my own set of backgrounds, so I downloaded a set from
+<a href="https://featured.exposure.co/">Exposure.co</a> and had the extension randomly
+select one to display. For the clock, in addition to the time and date, I
+visualized the progress of the current quarter, half, and year as rings around
+the clock.</p>
+
+<p><img src="/img/new-tab-clock.jpg" alt="Example screenshot of clock and background" /></p>
+
+<p>The Chrome extension loaded the images from my Desktop; I have since removed
+them from this online version for sake of file size. Take a look <a href="/day-count/">here</a>.</p>
+:ET
