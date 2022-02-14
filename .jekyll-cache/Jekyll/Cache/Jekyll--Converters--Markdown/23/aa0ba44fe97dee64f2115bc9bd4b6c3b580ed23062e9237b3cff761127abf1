@@ -1,0 +1,32 @@
+I"�<p>If you’ve seen my previous posts on where I had been or what I had been
+listening to, you might have noticed that I’m fascinated by the story
+information can tell. I’m trying my hand at something similar but also very
+different: generative art. Generative art is, by definition, art that is created
+by a system that makes decisions separate from the creator.</p>
+
+<p>With the infographics I have worked on, hard data serves as a fixed
+input into a design format that I tweak to highlight aspects of the data.
+Opposite to that, generative art I can set the rules for how the system
+behaves, but the outcome is still random. Well, pseudo-random.</p>
+
+<p>My first project has been working on textural gradients, where the gradient
+is formed by the density of the texture, rather than color opacity.</p>
+
+<p>This work is largely derivative of <a href="https://www.instagram.com/beingheumann/">Andrew
+Heumann</a>.</p>
+
+<p><img src="/img/generative_art/poly-5998156520670743179.jpg" alt="connected dots gradient" />
+<br />
+<img src="/img/generative_art/short-lines-300-25-1.000000-0.500000-5593237240519215418.jpg" alt="scribbles lines gradient" />
+<br />
+<img src="/img/generative_art/lines-600-30-0-5145172688552487739.jpg" alt="scribbles lines gradient" />
+<br />
+<img src="/img/generative_art/midpoint-lines-3763492572620996482.jpg" alt="midpoint lines gradient" /></p>
+
+<p>I learned a lot about visualizing linear, polynomial, exponential, and
+logarithmic functions. In this, if linear wasn’t what I wanted, it was
+polynomial. I thought I wanted something that decayed exponentially, but that
+was too fast. Polynomial is the way to go.</p>
+
+<p>Poly is the way to go. Happy Pride, everyone!</p>
+:ET
