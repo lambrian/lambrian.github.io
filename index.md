@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-Hi, I'm Brian Lam. I am a software engineer at Figma, building features to
+Hi, I'm Brian Lam. I am a software engineering manager at Figma, building features to
 support design systems. I was previously at a company previously known as
 Facebook,
 building various parts of Instagram, Messenger, and Ads. Before that, I was a
