@@ -5,7 +5,7 @@ _example-posts/
 _site/
 .sass-cache/
 production
-.jekyll-cache/
+.jekyll-cache/*
 
 # Local
 *.DS_Store

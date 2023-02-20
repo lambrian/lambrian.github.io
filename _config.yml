@@ -23,5 +23,3 @@ markdown: kramdown
 collections:
   - selected_photos
   - generative_art
-
-theme: jekyll-theme-minimal
