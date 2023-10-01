@@ -250,15 +250,16 @@ Site header
 }
 
 .post-title {
-.post-meta {
-  font-size: $small-font-size;
-  color: $grey-color;
+  line-height: 1;
 
   @include media-query($on-laptop) {
     text-align: center;
   }
 }
-  line-height: 1;
+
+.post-meta {
+  font-size: $small-font-size;
+  color: $grey-color;
 
   @include media-query($on-laptop) {
     text-align: center;
