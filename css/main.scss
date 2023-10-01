@@ -317,29 +317,6 @@ Site header
 
 /* End Posts */
 
-/* Photos */
-.photos-container {
-  align-items: center;
-  display: flex;
-  flex-wrap: nowrap;
-  height: 100%;
-
-  .selected-photo-container {
-    align-items: center;
-    display: flex;
-    flex-shrink: 0;
-    height: 100%;
-    margin-left: 20px;
-
-    .selected-photo {
-      height: 96%;
-      width: auto;
-    }
-  }
-}
-
-/* End Photos */
-
 :root {
   --content-wrapper-padding: 120px 120px;
   --title-size: 50px;
