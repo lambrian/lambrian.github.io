@@ -71,31 +71,6 @@ body {
   }
 }
 
-/**
- * Images
- */
-img {
-  max-width: 100%;
-  vertical-align: middle;
-  display: block;
-  margin: 0 auto;
-}
-
-.img-group {
-  display: flex;
-}
-
-.img-group > div {
-  display: flex;
-  align-items: center;
-}
-
-.caption {
-  font-size: 12px;
-  color: grey;
-  text-align: center;
-}
-
 /** General */
 
 a {
