@@ -2,29 +2,18 @@
 layout: default
 ---
 <div class="home">
-  {% assign categories = "Projects Thoughts" | split: " " %}
-  {% for category in categories %}
-    <div class="category-section">
-      <div class="category-title">
-        {{category}}
-      </div>
-      <ul class="post-list">
-        {% for post in site.categories[category] %}
-          <li>
-            <div class="post-link">
-              <a class="post-link-title" href="{{ post.url | prepend: site.baseurl }}">
-                {{ post.title }}
-              </a>
-              <div class="post-link-date">
-                {{ post.date | date: "%B %-d, %Y" }}
-              <div>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% if forloop.last != true %}
-    <div class="category-divider" />
-    {% endif %}
-  {% endfor %}
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <div class="post-link">
+          <a class="post-link-title" href="{{ post.url | prepend: site.baseurl }}">
+            {{ post.title }}
+          </a>
+          <div class="post-link-date">
+            {{ post.date | date: "%B %-d, %Y" }}
+          <div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
 </div>
