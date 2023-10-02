@@ -3,42 +3,24 @@
 ---
 @charset "utf-8";
 
-// Our variables
-$base-font-family-serif: "Helvetica Neue", sans-serif;
-$base-font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$base-font-size:   16px;
-$base-font-weight: 400;
-$large-font-size: $base-font-size * 1.125;
-$heavy-font-weight: 600;
-$small-font-size:  $base-font-size * 0.875;
-$base-line-height: 1.5;
+:root {
+  --content-wrapper-padding: 120px 120px;
+  --title-size: 50px;
+  --body-column-count: 4;
+  --body-column-size: 250px;
+  --base-font-size: 16px;
+  --base-line-height: 1.5;
+  --base-text-color: #111;
+  --base-background-color: #FDFDFD;
+  --base-highlight-color: #FFD700;
+}
 
-$spacing-unit:     28px;
-
-$text-color:       #111;
-$background-color: #fdfdfd;
-
-$grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
-$brand-color:      $grey-color-dark;
-$highlight-color:  #FFD700;
-
-// Width of the content area
-$content-width:    800px;
-$on-laptop:        800px;
-$on-palm:          600px;
-
-// Use media queries like this:
-// @include media-query($on-palm) {
-//     .wrapper {
-//         padding-right: $spacing-unit / 2;
-//         padding-left: $spacing-unit / 2;
-//     }
-// }
-@mixin media-query($device) {
-  @media screen and (max-width: $device) {
-    @content;
+@media (max-width: 800px) {
+  :root {
+    --content-wrapper-padding: 20px 20px;
+    --title-size: 32px;
+    --body-column-count: 2;
+    --body-column-size: 1fr;
   }
 }
 
@@ -56,50 +38,31 @@ p {
   margin-bottom: 20px;
 }
 
-/**
- * Basic styling
- */
-body {
-  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family-serif;
-  color: $text-color;
-  background-color: $background-color;
-  ::selection {
-    background: $highlight-color; /* WebKit/Blink Browsers */
-  }
-  ::-moz-selection {
-    background: $highlight-color; /* WebKit/Blink Browsers */
-  }
-}
-
 /** General */
-
 a {
-  color: $text-color;
-  font-weight: $heavy-font-weight;
+  color: var(--base-text-color);
   text-decoration: none;
+  font-weight: 500;
+  transition: color 100ms ease-in 0ms;
 
   &:hover {
-    color: $highlight-color;
+    color: var(--base-highlight-color);
   }
 }
 
-:root {
-  --content-wrapper-padding: 120px 120px;
-  --title-size: 50px;
-  --body-column-count: 4;
-}
-
-@media (max-width: 1000px) {
-  :root {
-    --content-wrapper-padding: 20px 20px;
-    --title-size: 32px;
-    --body-column-count: 2;
+body {
+  font: var(--base-font-size)/var(--base-line-height) "Helvetica Neue", sans-serif;
+  color: var(--base-text-color);
+  background-color: var(--base-background-color);
+  ::selection {
+    background: var(--base-highlight-color);
   }
 }
 
+/* Home Page */
 .content-wrapper {
   display: grid;
-  grid-template-columns: repeat(var(--body-column-count), 1fr);
+  grid-template-columns: repeat(var(--body-column-count), var(--body-column-size));
   padding: var(--content-wrapper-padding);
   column-gap: 20px;
   row-gap: 20px;
