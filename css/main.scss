@@ -80,3 +80,85 @@ body {
   grid-row: 2;
   font-size: 24px;;
 }
+
+.photo-essay-wrapper {
+  display: flex;
+  margin: 0 auto;
+  max-width: 90%;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.photo-essay-wrapper > p {
+  color: #444;
+}
+
+.essay-title {
+  font-size: 72px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.essay-subtitle {
+  font-size: 24px;
+}
+
+.photoset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 12px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.cover-container {
+  height: 100vh;
+  width: 100%;
+  padding-bottom: 32px;
+}
+
+.cover {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  object-fit: cover;
+}
+
+.grid-2 > img.photo {
+  flex: 1 0 0;
+  object-fit: cover;
+  height: 1100px;
+}
+
+.grid-3 {
+  align-self: center;
+  width: 1500px;
+  max-width: 100vw;
+}
+
+.grid-3 > img.photo {
+  flex: 1 0 0;
+  object-fit: cover;
+  height: 700px;
+}
+
+.photoset > .photo {
+  height: var(--photoset-img-height, 512px);
+}
+
+.photo.small {
+  height: var(--photoset-img-height, 374px);
+
+}
+
+.photo.xl {
+  height: var(--photoset-img-height, 920px);
+
+}
+
+.photoset > .key {
+  width: 100%;
+}
