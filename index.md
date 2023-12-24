@@ -12,6 +12,6 @@ layout: default
         <p>
             I was previously an engineer, most recently at Figma, and previously at Meta building various parts of Instagram, Messenger, and Ads. Before that, I was at Stanford where I studied Computer Science.
         </p>
-        <p> I enjoy taking photos which can be found on my <a href="https://instagram.com/_brianlam">Instagram</a>. I most recently traveled to <a href="/blog/berlin.html">Berlin</a>.</p>
+        <p> I enjoy taking photos which can be found on my <a href="https://instagram.com/_brianlam">Instagram</a>. I most recently traveled to <a href="/blog/berlin">Berlin</a>.</p>
     </div>
 </div>
