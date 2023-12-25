@@ -53,7 +53,7 @@ layout: default
         <img class="photo" src="/img/berlin/doner-2.jpg">
         <img class="photo" src="/img/berlin/doner-3.jpg">
     </div>
-    <div class="photoset grid-2">
+    <div class="photoset">
         <img class="photo" src="/img/berlin/brian.jpg">
         <img class="photo" src="/img/berlin/danny.jpg">
     </div>
