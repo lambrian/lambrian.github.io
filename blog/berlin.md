@@ -1,10 +1,8 @@
 ---
-layout: default
+layout: essay
 ---
-
 <div class="cover-container">
-
-<img class="cover" src="/img/berlin/cover.jpg">
+    <img class="cover" src="/img/berlin/cover.jpg">
 </div>
 <div class="photo-essay-wrapper">
     <p class="essay-title">Berlin, Germany</p>
@@ -61,38 +59,3 @@ layout: default
         <img class="photo" src="/img/berlin/group.jpg">
     </div>
 </div>
-
-<script>
-const onresize = (event) => {
-    const photosets = document.querySelectorAll(".photoset");
-    for (photoset of photosets) {
-        console.log(photoset.offsetWidth, photoset.children);
-        const photos = [...photoset.children];
-        const heights = photos.map(elem => elem.naturalHeight);
-        const widths = photos.map(elem => elem.naturalWidth)
-        const max_h = Math.max(...heights);
-        const scales = heights.map((height) => max_h/height);
-        const scaled_widths = widths.map((width, i) => width * scales[i]);
-        const page_width = document.querySelector(".photo-essay-wrapper > .photoset").offsetWidth;
-
-        const overall_scale = (page_width - ((heights.length - 1) * 12)) / (scaled_widths.reduce((sum, width) => sum + width, 0));
-
-        const final_scaled_heights = heights.map((height, i) => Math.floor(height * scales[i] * overall_scale));
-        const final_scaled_widths = widths.map((width, i) => Math.floor(width * scales[i] * overall_scale) - 1);
-        console.log('w', widths, 'h', heights);
-        console.log('scales', scales);
-        console.log('w', final_scaled_widths, 'h', final_scaled_heights);
-
-        for (let i = 0; i < photoset.children.length; i++) {
-            photoset.children[i].style.width = `${final_scaled_widths[i]}px`;
-            photoset.children[i].style.height = `${final_scaled_heights[i]}px`;
-        }
-    }
-};
-addEventListener("resize", onresize);
-Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
-    console.log('images finished loading');
-    onresize();
-});
-
-</script>
