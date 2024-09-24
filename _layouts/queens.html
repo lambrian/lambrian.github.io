@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    {% include head.html %}
+    <body>
+        <script>
+            function handleCellClick(e) {
+                console.log('handle', e.innerHTML);
+                if (e.innerHTML == "") {
+                    e.innerHTML = "x";
+                } else if (e.innerHTML == "x") {
+                    e.innerHTML = "&#128081;";
+                } else {
+                    e.innerHTML = "";
+                }
+            }
+        </script>
+        <style>
+            :root {
+                --cell-size: 50px;
+            }
+
+            .grid {
+                font-size: calc(var(--cell-size) / 2);
+                font-family: sans-serif;
+                display: grid;
+                grid-template-columns: repeat(var(--cols), var(--cell-size));
+                grid-template-rows: repeat(var(--rows), var(--cell-size));
+                column-gap: 2px;
+                row-gap: 2px;
+
+            }
+
+            .cell {
+                background-color: grey;
+                display: inline-block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .color-0 {
+                background-color: #FFD765;
+                /* Vibrant Yellow */
+            }
+
+            .color-1 {
+                background-color: #6FC9F4;
+                /* Bright Sky Blue */
+            }
+
+            .color-2 {
+                background-color: #77C682;
+                /* Lively Soft Green */
+            }
+
+            .color-3 {
+                background-color: #FF7A46;
+                /* Bold Orange */
+            }
+
+            .color-4 {
+                background-color: #FF7BF0;
+                /* Bright Red-Pink */
+            }
+
+            .color-5 {
+                background-color: #C078D9;
+                /* Rich Lavender Purple */
+            }
+
+            .color-6 {
+                background-color: #FFB94B;
+                /* Warm Orange */
+            }
+
+            .color-7 {
+                background-color: #787BD9;
+                /* Vivid Indigo */
+            }
+
+            .color-8 {
+                background-color: #53D5D9;
+                /* Vibrant Teal */
+            }
+
+            .color-9 {
+                background-color: #A6D95B;
+                /* Fresh Olive Green */
+            }
+
+            .color-10 {
+                background-color: #FFA6C1;
+                /* Playful Pink */
+            }
+
+            .color-11 {
+                background-color: #8CD977;
+                /* Bright Mint Green */
+            }
+
+            .color-12 {
+                background-color: #FFBF86;
+                /* Soft Peach */
+            }
+
+            .color-13 {
+                background-color: #B485E5;
+                /* Deep Lavender Purple */
+            }
+
+            .color-14 {
+                background-color: #FFAC7A;
+                /* Coral Peach */
+            }
+
+            .color-15 {
+                background-color: #70D3E5;
+                /* Aqua Blue */
+            }
+
+            .color-16 {
+                background-color: #FFF05C;
+                /* Bright Cream Yellow */
+            }
+
+            .color-17 {
+                background-color: #85A8FF;
+                /* Soft Baby Blue */
+            }
+
+            .color-18 {
+                background-color: #E18A8C;
+                /* Rose Red */
+            }
+
+            .color-19 {
+                background-color: #FF97A4;
+                /* Soft Coral Pink */
+            }
+        </style>
+        {{content}}
+    </body>
+</html>
