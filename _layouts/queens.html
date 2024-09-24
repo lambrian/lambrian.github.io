@@ -4,22 +4,36 @@
     <body>
         <script>
             function handleCellClick(e) {
-                console.log('handle', e.innerHTML);
-                if (e.innerHTML == "") {
-                    e.innerHTML = "x";
-                } else if (e.innerHTML == "x") {
-                    e.innerHTML = "&#128081;";
+                if (e.innerHTML == '') {
+                    e.innerHTML = 'x'
+                } else if (e.innerHTML == 'x') {
+                    e.innerHTML = '&#128081;'
                 } else {
-                    e.innerHTML = "";
+                    e.innerHTML = ''
                 }
             }
         </script>
         <style>
-            :root {
-                --cell-size: 50px;
+            .nav-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
+            .nav-button {
+                padding: 12px 12px;
+                border: 2px solid black;
+                margin: 0 10px;
+                border-radius: 5px;
+            }
+            .grid-container {
+                display: flex;
+                justify-content: center;
+                padding: 20px 0;
+            }
             .grid {
+                --cell-size: calc(min(90vw / var(--rows), 50px));
+                background-color: black;
                 font-size: calc(var(--cell-size) / 2);
                 font-family: sans-serif;
                 display: grid;
@@ -27,7 +41,6 @@
                 grid-template-rows: repeat(var(--rows), var(--cell-size));
                 column-gap: 2px;
                 row-gap: 2px;
-
             }
 
             .cell {
@@ -39,105 +52,108 @@
             }
 
             .color-0 {
-                background-color: #FFD765;
+                background-color: #ffd765;
                 /* Vibrant Yellow */
             }
 
             .color-1 {
-                background-color: #6FC9F4;
+                background-color: #6fc9f4;
                 /* Bright Sky Blue */
             }
 
             .color-2 {
-                background-color: #77C682;
+                background-color: #77c682;
                 /* Lively Soft Green */
             }
 
             .color-3 {
-                background-color: #FF7A46;
+                background-color: #ff7a46;
                 /* Bold Orange */
             }
 
             .color-4 {
-                background-color: #FF7BF0;
+                background-color: #ff7bf0;
                 /* Bright Red-Pink */
             }
 
             .color-5 {
-                background-color: #C078D9;
+                background-color: #c078d9;
                 /* Rich Lavender Purple */
             }
 
             .color-6 {
-                background-color: #FFB94B;
+                background-color: #ffb94b;
                 /* Warm Orange */
             }
 
             .color-7 {
-                background-color: #787BD9;
+                background-color: #787bd9;
                 /* Vivid Indigo */
             }
 
             .color-8 {
-                background-color: #53D5D9;
+                background-color: #53d5d9;
                 /* Vibrant Teal */
             }
 
             .color-9 {
-                background-color: #A6D95B;
+                background-color: #a6d95b;
                 /* Fresh Olive Green */
             }
 
             .color-10 {
-                background-color: #FFA6C1;
+                background-color: #ffa6c1;
                 /* Playful Pink */
             }
 
             .color-11 {
-                background-color: #8CD977;
+                background-color: #8cd977;
                 /* Bright Mint Green */
             }
 
             .color-12 {
-                background-color: #FFBF86;
+                background-color: #ffbf86;
                 /* Soft Peach */
             }
 
             .color-13 {
-                background-color: #B485E5;
+                background-color: #b485e5;
                 /* Deep Lavender Purple */
             }
 
             .color-14 {
-                background-color: #FFAC7A;
+                background-color: #ffac7a;
                 /* Coral Peach */
             }
 
             .color-15 {
-                background-color: #70D3E5;
+                background-color: #70d3e5;
                 /* Aqua Blue */
             }
 
             .color-16 {
-                background-color: #FFF05C;
+                background-color: #fff05c;
                 /* Bright Cream Yellow */
             }
 
             .color-17 {
-                background-color: #85A8FF;
+                background-color: #85a8ff;
                 /* Soft Baby Blue */
             }
 
             .color-18 {
-                background-color: #E18A8C;
+                background-color: #e18a8c;
                 /* Rose Red */
             }
 
             .color-19 {
-                background-color: #FF97A4;
+                background-color: #ff97a4;
                 /* Soft Coral Pink */
             }
         </style>
-        {{content}}
+        <div class="grid-container">{{content}}</div>
+        <div class="nav-container">
+            <div class="nav-button"><a href="/queens">All Challenges</a></div>
+        </div>
     </body>
 </html>
