@@ -3,6 +3,13 @@
     {% include head.html %}
     <body>
         <script>
+            function clearBoard() {
+                let cells = document.getElementsByClassName('cell')
+                for (let i = 0; i < cells.length; i++) {
+                    cells[i].innerHTML = ''
+                }
+            }
+
             function handleCellClick(e) {
                 if (e.innerHTML == '') {
                     e.innerHTML = 'x'
@@ -153,6 +160,7 @@
         </style>
         <div class="grid-container">{{content}}</div>
         <div class="nav-container">
+            <div class="nav-button" onclick="clearBoard();">Clear</div>
             <div class="nav-button"><a href="/queens">All Challenges</a></div>
         </div>
     </body>
