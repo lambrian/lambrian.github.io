@@ -13,8 +13,8 @@ export const Home = () => {
                 <p>
                     I was previously an engineer, most recently at Figma, and
                     previously at Meta building various parts of Instagram,
-                    Messenger, and Ads. Before that, I was at Stanford where I
-                    studied Computer Science.
+                    Messenger, and Ads. Before that, I was at Stanford
+                    University where I studied Computer Science.
                 </p>
                 <p>
                     {' '}
