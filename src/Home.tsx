@@ -18,7 +18,7 @@ export const Home = () => {
                 </p>
                 <p>
                     {' '}
-                    I like taking photos which can be found on my{' '}
+                    I like taking photos which I sometimes share on my{' '}
                     <a href="https://instagram.com/_brianlam">Instagram</a>. I
                     most recently traveled to <a href="/blog/berlin">Berlin</a>.
                 </p>
