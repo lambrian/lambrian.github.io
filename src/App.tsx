@@ -3,8 +3,7 @@ import { Home } from './Home'
 import { Routes, Route } from 'react-router-dom'
 import { Queens } from './Queens'
 import { QueensBoard } from './QueensBoard'
-import { Berlin } from './Berlin'
-import { Photoset } from './PhotoSetDraft'
+import { Photoset } from './PhotoSet'
 
 export const App = () => {
     return (
