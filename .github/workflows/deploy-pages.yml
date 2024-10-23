@@ -1,8 +1,9 @@
-name: NodeJS with Grunt
+name: Deploy to Pages
 
 on:
     push:
-        branches: ['pages-src']
+        branches:
+            - master
 
 jobs:
     build:
