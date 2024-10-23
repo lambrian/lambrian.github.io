@@ -23,7 +23,6 @@ export const Home = () => {
                     most recently traveled to <a href="/blog/berlin">Berlin</a>.
                 </p>
             </div>
-            <div style={{ visibility: 'hidden' }}>9:37</div>
         </div>
     )
 }
