@@ -1,0 +1,31 @@
+name: Deploy to Pages
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+
+            - name: Build
+              run: npm install
+
+            - name: Deploy
+              env:
+                  NAME: lambrian
+                  EMAIL: brianlam93@gmail.com
+              run: |
+                  git config --global user.email $EMAIL
+                  git config --global user.name $NAME
+                  git remote set-url origin https://$NAME:${{ secrets.PAT_TOKEN }}@github.com/lambrian/lambrian.github.io.git
+                  npm run deploy
