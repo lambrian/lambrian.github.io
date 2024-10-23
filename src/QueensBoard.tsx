@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { BOARDS, QueenBoard } from './boards'
+import { BOARDS } from './boards'
 import './queens.css'
 import { useState } from 'react'
 

@@ -1,7 +1,4 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-import { Home } from './Home'
-import { QueensBoard } from './QueensBoard'
 import { BOARDS, QueenBoard } from './boards'
 
 export const Queens = () => {
