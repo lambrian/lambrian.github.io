@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const Home = () => {
     return (
@@ -20,7 +21,8 @@ export const Home = () => {
                     {' '}
                     I like taking photos which I sometimes share on my{' '}
                     <a href="https://instagram.com/_brianlam">Instagram</a>. I
-                    most recently traveled to <a href="/blog/berlin">Berlin</a>.
+                    most recently traveled to{' '}
+                    <Link to="/photos/berlin">Berlin</Link>.
                 </p>
             </div>
         </div>
