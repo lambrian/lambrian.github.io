@@ -1,5 +1,4 @@
 import React, {
-    ReactNode,
     PropsWithChildren,
     createContext,
     useContext,
@@ -27,7 +26,7 @@ const MyContext = createContext<XXX | undefined>(undefined)
 // This will allow you to use the context in any number of children more easily.
 // And it will also make sure that it is only used within Parent component
 const useData = () => {
-    const context = React.useContext(MyContext)
+    const context = useContext(MyContext)
 
     if (!context) {
         throw new Error('useData must be used within a <Parent />')
@@ -89,7 +88,7 @@ const Img = (props: ImgProps) => {
 }
 const PhotoRow = (props: PropsWithChildren<PhotoRowProps>) => {
     const ref = useRef(null)
-    const { dimensions, setDimensions } = useData()
+    const { dimensions } = useData()
     const { width, height } = useDimensions(ref)
     console.log(
         `row-width: ${width}, row-height: ${height}, photo dims: ${props.photos.map(
