@@ -40,7 +40,7 @@ const PhotoEssay = (props: PropsWithChildren<PhotoEssayProps>) => {
     return (
         <MyContext.Provider value={{ dimensions, setDimensions }}>
             <div className="cover-container">
-                <img className="cover" src={props.header} />
+                <img className="cover" src={props.header} alt={props.header} />
             </div>
             <div className="photo-essay-wrapper">
                 <p className="essay-title">Berlin, Germany</p>
@@ -71,6 +71,7 @@ const Img = (props: ImgProps) => {
             }}
             className="photo"
             src={props.photo}
+            alt={props.photo}
             onLoad={(e) => {
                 if (e.target instanceof HTMLImageElement) {
                     setDimensions(
