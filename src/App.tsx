@@ -3,7 +3,7 @@ import { Home } from './Home'
 import { Routes, Route } from 'react-router-dom'
 import { Queens } from './Queens'
 import { QueensBoard } from './QueensBoard'
-import { PhotoEssay } from './PhotoSetDraft'
+import { PhotoEssay } from './PhotoEssay'
 
 export const App = () => {
     return (
