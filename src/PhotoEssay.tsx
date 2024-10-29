@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState, useRef, useMemo } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import { useDimensions } from './useDimensions'
 import { useParams } from 'react-router-dom'
 import { PHOTO_ESSAYS } from './photo_essays'
