@@ -1,7 +1,8 @@
+import React from 'react'
 import { useParams } from 'react-router-dom'
 import { BOARDS } from './boards'
 import './queens.css'
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 const getDisplayState = (displayState: number) => {
     const currDisplay = displayState % 3
@@ -14,14 +15,20 @@ const getDisplayState = (displayState: number) => {
             return <></>
     }
 }
-const Cell = ({ color }: any) => {
-    const [display, setDisplay] = useState(0)
+interface CellProps {
+    color: number
+    index: number
+    display: number
+    setDisplay: (index: number, newVal: number) => void
+}
+
+const Cell = (props: CellProps) => {
     return (
         <div
-            onClick={() => setDisplay(display + 1)}
-            className={`cell color-${color}`}
+            onClick={() => props.setDisplay(props.index, props.display + 1)}
+            className={`cell color-${props.color}`}
         >
-            {getDisplayState(display)}
+            {getDisplayState(props.display)}
         </div>
     )
 }
@@ -35,26 +42,78 @@ declare module 'react' {
 
 export const QueensBoard = () => {
     const { date } = useParams()
-    if (!date) {
-        return <div>Not Found</div>
-    }
+    const matchingBoard = useMemo(() => {
+        if (!date) {
+            return null
+        }
+        return BOARDS.find((board) => board.date === date)
+    }, [date])
 
-    const matchingBoard = BOARDS.find((board) => board.date === date)
     if (!matchingBoard) {
         return <div>Not Found</div>
     }
-    const sideLength = Math.sqrt(matchingBoard.grid.length)
+
+    return <QueensBoardInner board={matchingBoard.grid} />
+}
+
+const QueensBoardInner = (props: { board: number[] }) => {
+    const sideLength = Math.sqrt(props.board.length)
+    const [displayState, setDisplayState] = useState(new Map())
+    const [undoStack, setUndoStack] = useState<
+        { index: number; prevValue: number }[]
+    >([])
+    const setDisplayStateImpl = useCallback(
+        (index: number, newVal: number) => {
+            setUndoStack([
+                ...undoStack,
+                { index, prevValue: displayState.get(index) ?? 0 },
+            ])
+            setDisplayState(new Map(displayState.set(index, newVal)))
+        },
+        [displayState, undoStack, setUndoStack]
+    )
+
+    const undo = useCallback(() => {
+        console.log(undoStack)
+        if (!undoStack.length) {
+            return
+        }
+
+        const lastAction = undoStack[undoStack.length - 1]
+        setDisplayStateImpl(lastAction.index, lastAction.prevValue)
+        setUndoStack(undoStack.slice(0, -1))
+    }, [undoStack, setUndoStack, setDisplayStateImpl])
+
+    const clear = useCallback(() => {
+        setDisplayState(new Map())
+        setUndoStack([])
+    }, [setDisplayState, setUndoStack])
 
     return (
-        <div className={'grid-container'}>
-            <div
-                className="grid"
-                style={{ '--rows': sideLength, '--cols': sideLength }}
-            >
-                {matchingBoard.grid.map((num) => (
-                    <Cell color={num}></Cell>
-                ))}
+        <>
+            <div className={'grid-container'}>
+                <div
+                    className="grid"
+                    style={{ '--rows': sideLength, '--cols': sideLength }}
+                >
+                    {props.board.map((num, i) => (
+                        <Cell
+                            color={num}
+                            index={i}
+                            display={displayState.get(i) ?? 0}
+                            setDisplay={setDisplayStateImpl}
+                        ></Cell>
+                    ))}
+                </div>
             </div>
-        </div>
+            <div className="nav-container">
+                <div className="nav-button" onClick={undo}>
+                    Undo
+                </div>
+                <div className="nav-button" onClick={clear}>
+                    Clear
+                </div>
+            </div>
+        </>
     )
 }
