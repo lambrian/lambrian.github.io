@@ -26,13 +26,16 @@ export const PhotoEssay = () => {
     )
 }
 
+interface ScaledPhotoDimensions {
+    final_scaled_widths: number[]
+    final_scaled_heights: number[]
+}
+
 const calculatePhotoDimensions = (
     photos: string[],
     photoDimensionsMap: Map<any, any> | undefined,
     width: number
-):
-    | { final_scaled_widths: number[]; final_scaled_heights: number[] }
-    | undefined => {
+): ScaledPhotoDimensions | undefined => {
     const photoDimensions = photos.map((photo) =>
         photoDimensionsMap?.get(photo)
     )
@@ -58,7 +61,7 @@ const calculatePhotoDimensions = (
     return { final_scaled_widths, final_scaled_heights }
 }
 
-const PhotoRow = (props: PropsWithChildren<{ photos: string[] }>) => {
+const PhotoRow = (props: { photos: string[] }) => {
     const ref = useRef(null)
     const [dimensions2, setDimensions2] = useState(new Map())
     const { width } = useDimensions(ref)
