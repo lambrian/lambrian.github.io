@@ -1,3 +1,6 @@
+:root {
+    --cell-border: 1.25px solid black;
+}
 .queens-list {
     display: flex;
     flex-direction: column;
@@ -140,4 +143,20 @@
 .color-19 {
     background-color: #ff97a4;
     /* Soft Coral Pink */
+}
+
+.border-left {
+    border-left: var(--cell-border);
+}
+
+.border-right {
+    border-right: var(--cell-border);
+}
+
+.border-top {
+    border-top: var(--cell-border);
+}
+
+.border-bottom {
+    border-bottom: var(--cell-border);
 }
