@@ -17,16 +17,45 @@ const getDisplayState = (displayState: number) => {
 }
 interface CellProps {
     color: number
+    grid: number[]
     index: number
     display: number
     setDisplay: (index: number, newVal: number) => void
+}
+
+const getCellBorder = (index: number, grid: number[]): string => {
+    const sideLength = Math.sqrt(grid.length)
+    let classStr = ''
+
+    if (index % sideLength > 0 && grid[index - 1] !== grid[index]) {
+        classStr += 'border-left '
+    }
+    if (
+        index % sideLength !== sideLength - 1 &&
+        index < grid.length &&
+        grid[index + 1] !== grid[index]
+    ) {
+        classStr += 'border-right '
+    }
+
+    if (index >= sideLength && grid[index - sideLength] !== grid[index]) {
+        classStr += 'border-top '
+    }
+
+    if (
+        index < grid.length - sideLength &&
+        grid[index] !== grid[index + sideLength]
+    ) {
+        classStr += 'border-bottom'
+    }
+    return classStr
 }
 
 const Cell = (props: CellProps) => {
     return (
         <div
             onClick={() => props.setDisplay(props.index, props.display + 1)}
-            className={`cell color-${props.color}`}
+            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)}`}
         >
             {getDisplayState(props.display)}
         </div>
@@ -99,6 +128,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
                     {props.board.map((num, i) => (
                         <Cell
                             color={num}
+                            grid={props.board}
                             index={i}
                             display={displayState.get(i) ?? 0}
                             setDisplay={setDisplayStateImpl}
