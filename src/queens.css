@@ -1,5 +1,5 @@
 :root {
-    --cell-border: 1.25px solid black;
+    --cell-border: 1px solid black;
 }
 .queens-list {
     display: flex;

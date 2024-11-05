@@ -208,4 +208,4 @@ export const BOARDS = [
             1, 1, 1,
         ],
     },
-]
+].reverse()
