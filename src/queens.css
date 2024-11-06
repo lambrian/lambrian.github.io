@@ -1,9 +1,31 @@
 :root {
     --cell-border: 1px solid black;
 }
-.queens-list {
+.game-container {
     display: flex;
+    align-items: center;
     flex-direction: column;
+}
+.queens-list {
+    padding: 12px;
+}
+
+.game-title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    padding: 12px 0;
+}
+
+.game-title > .decoration {
+    padding: 0 8px;
+}
+
+.game-option {
+    border: 2px solid black;
+    padding: 12px 12px;
+    border-radius: 12px;
+    margin: 8px;
 }
 
 .nav-container {
