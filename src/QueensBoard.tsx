@@ -90,7 +90,24 @@ const validateDisplayState = (
     display: Map<number, number>
 ) => {
     console.log(board, display)
-    // count queens per color map
+
+    // count queens per color region
+    // queens = {colorIndex: [true, false]} for every display, if it's 2 and the
+    // hasQueen has the color num, then every index with that colorNum is
+    // invalid
+    const hasQueen = new Set()
+    const invalidColors = new Set()
+    display.forEach(
+        (state: number, index: number, display: Map<Number, number>) => {
+            if (state === 2 && hasQueen.has(board[index])) {
+                console.log(`${board[index]} has multiple queens`)
+                invalidColors.add(board[index])
+            } else {
+                hasQueen.add(board[index])
+            }
+        }
+    )
+    //
     // count queens per row
     // count queens per column
 }
