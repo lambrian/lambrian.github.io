@@ -85,21 +85,36 @@ export const QueensBoard = () => {
     return <QueensBoardInner board={matchingBoard.grid} />
 }
 
+const validateDisplayState = (
+    board: number[],
+    display: Map<number, number>
+) => {
+    console.log(board, display)
+    // count queens per color map
+    // count queens per row
+    // count queens per column
+}
+
 const QueensBoardInner = (props: { board: number[] }) => {
     const sideLength = Math.sqrt(props.board.length)
     const [displayState, setDisplayState] = useState(new Map())
     const [undoStack, setUndoStack] = useState<
         { index: number; prevValue: number }[]
     >([])
+
     const setDisplayStateImpl = useCallback(
-        (index: number, newVal: number) => {
+        (index: number, newValRaw: number) => {
+            const newVal = newValRaw % 3
             setUndoStack([
                 ...undoStack,
                 { index, prevValue: displayState.get(index) ?? 0 },
             ])
-            setDisplayState(new Map(displayState.set(index, newVal)))
+
+            const result = new Map(displayState.set(index, newVal))
+            setDisplayState(result)
+            validateDisplayState(props.board, result)
         },
-        [displayState, undoStack, setUndoStack]
+        [props.board, displayState, undoStack, setUndoStack]
     )
 
     const undo = useCallback(() => {
