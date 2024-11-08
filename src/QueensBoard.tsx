@@ -21,6 +21,7 @@ interface CellProps {
     index: number
     display: number
     setDisplay: (index: number, newVal: number) => void
+    isInvalid: boolean
 }
 
 const getCellBorder = (index: number, grid: number[]): string => {
@@ -57,7 +58,9 @@ const Cell = (props: CellProps) => {
             onClick={() => props.setDisplay(props.index, props.display + 1)}
             className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)}`}
         >
-            {getDisplayState(props.display)}
+            <div className={`${props.isInvalid && 'invalid-cell'}`}>
+                {getDisplayState(props.display)}
+            </div>
         </div>
     )
 }
@@ -89,27 +92,67 @@ const validateDisplayState = (
     board: number[],
     display: Map<number, number>
 ) => {
-    console.log(board, display)
-
     // count queens per color region
     // queens = {colorIndex: [true, false]} for every display, if it's 2 and the
     // hasQueen has the color num, then every index with that colorNum is
     // invalid
-    const hasQueen = new Set()
     const invalidColors = new Set()
+    const colorHasQueen = new Set()
     display.forEach(
         (state: number, index: number, display: Map<Number, number>) => {
-            if (state === 2 && hasQueen.has(board[index])) {
-                console.log(`${board[index]} has multiple queens`)
+            if (state === 2 && colorHasQueen.has(board[index])) {
                 invalidColors.add(board[index])
             } else {
-                hasQueen.add(board[index])
+                colorHasQueen.add(board[index])
             }
         }
     )
-    //
     // count queens per row
+    const sideLength = Math.sqrt(board.length)
+    let invalidRows = new Set()
     // count queens per column
+    for (let row = 0; row < sideLength; row++) {
+        let rowHasQueen = false
+        for (let col = 0; col < sideLength; col++) {
+            if (rowHasQueen && display.get(row * sideLength + col) === 2) {
+                invalidRows.add(row)
+            } else if (display.get(row * sideLength + col) === 2) {
+                rowHasQueen = true
+            }
+        }
+    }
+    console.log('invalid rows', invalidRows)
+
+    const invalidCols = new Set()
+    for (let col = 0; col < sideLength; col++) {
+        let colHasQueen = false
+        for (let row = 0; row < sideLength; row++) {
+            if (colHasQueen && display.get(row * sideLength + col) === 2) {
+                invalidCols.add(col)
+            } else if (display.get(row * sideLength + col) === 2) {
+                colHasQueen = true
+            }
+        }
+    }
+    console.log('invalid cols', invalidCols)
+    // set invalid board
+    const invalidIndices = new Set()
+    for (let row = 0; row < sideLength; row++) {
+        for (let col = 0; col < sideLength; col++) {
+            if (
+                invalidRows.has(row) ||
+                invalidCols.has(col) ||
+                invalidColors.has(board[row * sideLength + col])
+            ) {
+                invalidIndices.add(row * sideLength + col)
+            }
+        }
+    }
+    console.log('invalid indices', invalidIndices)
+
+    // TODO add queen invalid adjacents
+
+    return invalidIndices
 }
 
 const QueensBoardInner = (props: { board: number[] }) => {
@@ -118,6 +161,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
     const [undoStack, setUndoStack] = useState<
         { index: number; prevValue: number }[]
     >([])
+    const [invalidState, setInvalidState] = useState(new Set())
 
     const setDisplayStateImpl = useCallback(
         (index: number, newValRaw: number) => {
@@ -129,13 +173,12 @@ const QueensBoardInner = (props: { board: number[] }) => {
 
             const result = new Map(displayState.set(index, newVal))
             setDisplayState(result)
-            validateDisplayState(props.board, result)
+            setInvalidState(validateDisplayState(props.board, result))
         },
         [props.board, displayState, undoStack, setUndoStack]
     )
 
     const undo = useCallback(() => {
-        console.log(undoStack)
         if (!undoStack.length) {
             return
         }
@@ -148,6 +191,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
     const clear = useCallback(() => {
         setDisplayState(new Map())
         setUndoStack([])
+        setInvalidState(new Set())
     }, [setDisplayState, setUndoStack])
 
     return (
@@ -164,6 +208,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
                             index={i}
                             display={displayState.get(i) ?? 0}
                             setDisplay={setDisplayStateImpl}
+                            isInvalid={invalidState.has(i)}
                         ></Cell>
                     ))}
                 </div>
