@@ -46,13 +46,13 @@
     padding: 20px 0;
 }
 .grid {
-    --cell-size: calc(min(90vw / var(--rows), 50px));
+    --cell-size: calc(min(90vw / var(--length), 50px));
     background-color: black;
     font-size: calc(var(--cell-size) / 2);
     font-family: sans-serif;
     display: grid;
-    grid-template-columns: repeat(var(--cols), var(--cell-size));
-    grid-template-rows: repeat(var(--rows), var(--cell-size));
+    grid-template-columns: repeat(var(--length), var(--cell-size));
+    grid-template-rows: repeat(var(--length), var(--cell-size));
     column-gap: 2px;
     row-gap: 2px;
     border: 4px solid black;
@@ -60,7 +60,7 @@
 }
 
 .cell {
-    background-color: grey;
+    background-color: var(--cell-color);
     display: inline-block;
     display: flex;
     align-items: center;
@@ -68,6 +68,7 @@
 }
 
 .invalid-cell {
+    --invalid-stripe: rgba(255, 10, 10, 0.7);
     width: 100%;
     height: 100%;
     display: flex;
@@ -75,110 +76,110 @@
     justify-content: center;
     background: repeating-linear-gradient(
         45deg,
-        red,
-        red 4px,
-        transparent 4px,
-        transparent 8px
+        var(--invalid-stripe),
+        var(--invalid-stripe) 4px,
+        var(--cell-color) 4px,
+        var(--cell-color) 8px
     );
 }
 
 .color-0 {
-    background-color: #ffd765;
+    --cell-color: #ffd765;
     /* Vibrant Yellow */
 }
 
 .color-1 {
-    background-color: #6fc9f4;
+    --cell-color: #6fc9f4;
     /* Bright Sky Blue */
 }
 
 .color-2 {
-    background-color: #77c682;
+    --cell-color: #77c682;
     /* Lively Soft Green */
 }
 
 .color-3 {
-    background-color: #ff7a46;
+    --cell-color: #ff7a46;
     /* Bold Orange */
 }
 
 .color-4 {
-    background-color: #ff7bf0;
+    --cell-color: #ff7bf0;
     /* Bright Red-Pink */
 }
 
 .color-5 {
-    background-color: #c078d9;
+    --cell-color: #c078d9;
     /* Rich Lavender Purple */
 }
 
 .color-6 {
-    background-color: #ffb94b;
+    --cell-color: #ffb94b;
     /* Warm Orange */
 }
 
 .color-7 {
-    background-color: #787bd9;
+    --cell-color: #787bd9;
     /* Vivid Indigo */
 }
 
 .color-8 {
-    background-color: #53d5d9;
+    --cell-color: #53d5d9;
     /* Vibrant Teal */
 }
 
 .color-9 {
-    background-color: #a6d95b;
+    --cell-color: #a6d95b;
     /* Fresh Olive Green */
 }
 
 .color-10 {
-    background-color: #ffa6c1;
+    --cell-color: #ffa6c1;
     /* Playful Pink */
 }
 
 .color-11 {
-    background-color: #8cd977;
+    --cell-color: #8cd977;
     /* Bright Mint Green */
 }
 
 .color-12 {
-    background-color: #ffbf86;
+    --cell-color: #ffbf86;
     /* Soft Peach */
 }
 
 .color-13 {
-    background-color: #b485e5;
+    --cell-color: #b485e5;
     /* Deep Lavender Purple */
 }
 
 .color-14 {
-    background-color: #ffac7a;
+    --cell-color: #ffac7a;
     /* Coral Peach */
 }
 
 .color-15 {
-    background-color: #70d3e5;
+    --cell-color: #70d3e5;
     /* Aqua Blue */
 }
 
 .color-16 {
-    background-color: #fff05c;
+    --cell-color: #fff05c;
     /* Bright Cream Yellow */
 }
 
 .color-17 {
-    background-color: #85a8ff;
+    --cell-color: #85a8ff;
     /* Soft Baby Blue */
 }
 
 .color-18 {
-    background-color: #e18a8c;
+    --cell-color: #e18a8c;
     /* Rose Red */
 }
 
 .color-19 {
-    background-color: #ff97a4;
+    --cell-color: #ff97a4;
     /* Soft Coral Pink */
 }
 

@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom'
 import { BOARDS } from './boards'
 import './queens.css'
 import { useCallback, useMemo, useState } from 'react'
+declare module 'react' {
+    interface CSSProperties {
+        '--length'?: number
+    }
+}
 
 const getDisplayState = (displayState: number) => {
     const currDisplay = displayState % 3
@@ -26,50 +31,41 @@ interface CellProps {
 
 const getCellBorder = (index: number, grid: number[]): string => {
     const sideLength = Math.sqrt(grid.length)
-    let classStr = ''
+    let classes = []
 
     if (index % sideLength > 0 && grid[index - 1] !== grid[index]) {
-        classStr += 'border-left '
+        classes.push('border-left')
     }
     if (
         index % sideLength !== sideLength - 1 &&
         index < grid.length &&
         grid[index + 1] !== grid[index]
     ) {
-        classStr += 'border-right '
+        classes.push('border-right')
     }
 
     if (index >= sideLength && grid[index - sideLength] !== grid[index]) {
-        classStr += 'border-top '
+        classes.push('border-top')
     }
 
     if (
         index < grid.length - sideLength &&
         grid[index] !== grid[index + sideLength]
     ) {
-        classStr += 'border-bottom'
+        classes.push('border-bottom')
     }
-    return classStr
+    return classes.join(' ')
 }
 
 const Cell = (props: CellProps) => {
     return (
         <div
             onClick={() => props.setDisplay(props.index, props.display + 1)}
-            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)}`}
+            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''}`}
         >
-            <div className={`${props.isInvalid ? 'invalid-cell' : ''}`}>
-                {getDisplayState(props.display)}
-            </div>
+            {getDisplayState(props.display)}
         </div>
     )
-}
-
-declare module 'react' {
-    interface CSSProperties {
-        '--rows'?: number
-        '--cols'?: number
-    }
 }
 
 export const QueensBoard = () => {
@@ -121,7 +117,6 @@ const validateDisplayState = (
             }
         }
     }
-    console.log('invalid rows', invalidRows)
 
     const invalidCols = new Set()
     for (let col = 0; col < sideLength; col++) {
@@ -134,7 +129,6 @@ const validateDisplayState = (
             }
         }
     }
-    console.log('invalid cols', invalidCols)
     // set invalid board
     const invalidQueens = new Set()
     display.forEach(
@@ -167,7 +161,6 @@ const validateDisplayState = (
             }
         }
     }
-    console.log('invalid indices', invalidIndices)
 
     return invalidIndices
 }
@@ -179,6 +172,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
         { index: number; prevValue: number }[]
     >([])
     const [invalidState, setInvalidState] = useState(new Set())
+    const [showInvalidState, setShowInvalidState] = useState(false)
 
     const setDisplayStateImpl = useCallback(
         (index: number, newValRaw: number) => {
@@ -214,10 +208,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
     return (
         <>
             <div className={'grid-container'}>
-                <div
-                    className="grid"
-                    style={{ '--rows': sideLength, '--cols': sideLength }}
-                >
+                <div className="grid" style={{ '--length': sideLength }}>
                     {props.board.map((num, i) => (
                         <Cell
                             color={num}
@@ -225,7 +216,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
                             index={i}
                             display={displayState.get(i) ?? 0}
                             setDisplay={setDisplayStateImpl}
-                            isInvalid={invalidState.has(i)}
+                            isInvalid={showInvalidState && invalidState.has(i)}
                         ></Cell>
                     ))}
                 </div>
@@ -237,6 +228,12 @@ const QueensBoardInner = (props: { board: number[] }) => {
                 <div className="nav-button" onClick={clear}>
                     Clear
                 </div>
+                <input
+                    type="checkbox"
+                    {...{ checked: showInvalidState }}
+                    onClick={() => setShowInvalidState(!showInvalidState)}
+                ></input>
+                Show Invalid Placement
             </div>
         </>
     )
