@@ -58,7 +58,7 @@ const Cell = (props: CellProps) => {
             onClick={() => props.setDisplay(props.index, props.display + 1)}
             className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)}`}
         >
-            <div className={`${props.isInvalid && 'invalid-cell'}`}>
+            <div className={`${props.isInvalid ? 'invalid-cell' : ''}`}>
                 {getDisplayState(props.display)}
             </div>
         </div>
@@ -102,7 +102,7 @@ const validateDisplayState = (
         (state: number, index: number, display: Map<Number, number>) => {
             if (state === 2 && colorHasQueen.has(board[index])) {
                 invalidColors.add(board[index])
-            } else {
+            } else if (state === 2) {
                 colorHasQueen.add(board[index])
             }
         }
@@ -136,21 +136,38 @@ const validateDisplayState = (
     }
     console.log('invalid cols', invalidCols)
     // set invalid board
+    const invalidQueens = new Set()
+    display.forEach(
+        (state: number, index: number, display: Map<Number, number>) => {
+            if (state === 2) {
+                for (let row = -1; row < 2; row++) {
+                    for (let col = -1; col < 2; col++) {
+                        if (row === 0 && col === 0) {
+                            continue
+                        }
+                        if (display.get(index + row * sideLength + col) === 2) {
+                            invalidQueens.add(index)
+                        }
+                    }
+                }
+            }
+        }
+    )
+
     const invalidIndices = new Set()
     for (let row = 0; row < sideLength; row++) {
         for (let col = 0; col < sideLength; col++) {
             if (
                 invalidRows.has(row) ||
                 invalidCols.has(col) ||
-                invalidColors.has(board[row * sideLength + col])
+                invalidColors.has(board[row * sideLength + col]) ||
+                invalidQueens.has(row * sideLength + col)
             ) {
                 invalidIndices.add(row * sideLength + col)
             }
         }
     }
     console.log('invalid indices', invalidIndices)
-
-    // TODO add queen invalid adjacents
 
     return invalidIndices
 }
