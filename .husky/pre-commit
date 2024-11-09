@@ -3,3 +3,10 @@
 
 npm test
 npx lint-staged
+
+branch_name=$(git symbolic-ref --short HEAD)
+
+if [ "$branch_name" = "master" ]; then
+    echo "❌ Direct commits to the master branch are not allowed."
+    exit 1
+fi
