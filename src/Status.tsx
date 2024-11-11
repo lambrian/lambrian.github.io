@@ -11,6 +11,12 @@ const getChartIndicator = (location: string) => {
         return 'status-info'
     }
 }
+
+const getChartRel = (index: number, total: number) => {
+    const quarter = Math.floor(Math.abs(index - total) / 30)
+    return `rel-${quarter}`
+}
+
 export const StatusPage = () => {
     const displayedStatuses = useMemo(() => {
         return statuses.results.map((page) => ({
@@ -22,14 +28,14 @@ export const StatusPage = () => {
     return (
         <div className="page-wrapper">
             <div className="page">
+                <div className="page-title">Status History</div>
                 <div className="section">
-                    <div className="section-title">Status History</div>
                     <div className="chart-section">
-                        Location
+                        <div className="chart-title">Location</div>
                         <div className="chart">
-                            {displayedStatuses.map((page) => (
+                            {displayedStatuses.map((page, i) => (
                                 <div
-                                    className={`chart-indicator ${getChartIndicator(page.location)}`}
+                                    className={`chart-indicator ${getChartIndicator(page.location)} ${getChartRel(i, displayedStatuses.length)}`}
                                 ></div>
                             ))}
                         </div>
@@ -37,10 +43,10 @@ export const StatusPage = () => {
                 </div>
                 <div className="section">
                     <div className="section-title">Previous Incidents</div>
-                    {displayedStatuses.map((page) => (
+                    {displayedStatuses.reverse().map((page) => (
                         <div>
-                            <div>Date {page.date}</div>
-                            <div>Date {page.location}</div>
+                            <div className="date-summary">{page.date}</div>
+                            <div>{page.location}</div>
                         </div>
                     ))}
                 </div>

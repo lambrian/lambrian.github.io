@@ -85,15 +85,99 @@ body ::selection {
     border: 1px solid grey;
 }
 
+:root {
+    --display-rel-0: inherit;
+    --display-rel-1: inherit;
+    --display-rel-2: inherit;
+}
+
+.page-title {
+    padding: 24px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.section {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+
+.section-title {
+    font-size: 24px;
+}
+
+.chart-section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+}
+
+.chart-title {
+    font-family: 16px;
+    font-weight: 500;
+}
+
 .chart {
     display: flex;
     flex-direction: row;
     column-gap: 2px;
 }
+
 .chart-indicator {
-    width: 7px;
-    height: 42px;
+    height: 38px;
     background-color: #dbdbdb;
+    flex-grow: 1;
+}
+
+.date-summary {
+    border-bottom: 1px solid lightgray;
+    padding: 4px 0;
+}
+
+@media (max-width: 1024px) {
+    :root {
+        --display-rel-0: inherit;
+        --display-rel-1: inherit;
+        --display-rel-2: none;
+    }
+
+    .page {
+        width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --display-rel-0: inherit;
+        --display-rel-1: none;
+        --display-rel-2: none;
+    }
+
+    .page {
+        width: 100%;
+    }
+
+    .page-wrapper {
+        padding: 0;
+    }
+}
+
+/* [0, 30] days from most recent */
+.rel-0 {
+    display: var(--display-rel-0);
+}
+
+/* [31, 60] days from most recent */
+.rel-1 {
+    display: inherit;
+    display: var(--display-rel-1);
+}
+
+/* [60, 90] days from most recent */
+.rel-2 {
+    display: var(--display-rel-2);
 }
 
 .status-ok {
