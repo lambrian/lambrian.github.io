@@ -30,4 +30,4 @@ jobs:
                   git config --global user.name $NAME
                   git remote set-url origin https://$NAME:${{ secrets.PAT_TOKEN }}@github.com/lambrian/lambrian.github.io.git
                   npm run deploy
-                working-directory: brianl.am
+              working-directory: brianl.am
