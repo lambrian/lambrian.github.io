@@ -21,6 +21,14 @@ jobs:
               run: npm install
               working-directory: brianl.am
 
+            - name: Build Notion Data Package
+              run: npm install
+              working-directory: notion-data
+
+            - name: Fetch Notion Data
+              run: npm run start
+              working-directory: notion-data
+
             - name: Deploy
               env:
                   NAME: lambrian
