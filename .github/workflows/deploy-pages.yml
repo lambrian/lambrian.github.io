@@ -26,8 +26,12 @@ jobs:
               working-directory: notion-data
 
             - name: Fetch Notion Data
-              run: npm run start
               working-directory: notion-data
+              env:
+                  NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
+              run: |
+                  echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
+                  npm run start
 
             - name: Deploy
               env:
