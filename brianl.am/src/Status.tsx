@@ -36,12 +36,9 @@ export const ChartIndicator = ({
             style={{ position: 'relative' }}
         >
             {isTooltipVisible && (
-                <div
-                    className="chart-indicator-tooltip"
-                    style={{
-                        whiteSpace: 'nowrap',
-                    }}
-                >
+                <div className="chart-indicator-tooltip">
+                    <div className="triangle-bg"></div>
+                    <div className="triangle"></div>
                     <div className="tooltip-date">{page.date}</div>
                     <div className="tooltip-summary">{page.location}</div>
                 </div>

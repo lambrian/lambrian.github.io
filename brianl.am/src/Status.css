@@ -192,18 +192,43 @@ body ::selection {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translate(-50%, 10%);
+    transform: translate(-50%, 8%);
     border-radius: 4px;
     padding: 16px;
     width: 180px;
     z-index: 1000;
     font-size: 14px;
     background-color: white;
-    border: 1px solid gray;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     height: 120px;
-    filter: drop-shadow(lightgray 1px 1px 1px);
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.15));
+    white-space: nowrap;
 }
 
 .tooltip-date {
     padding-bottom: 8px;
+    font-weight: 500;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border: solid 9px;
+    border-color: transparent transparent white transparent;
+    position: absolute;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    transform: translate(91px, -17px);
+}
+
+.triangle-bg {
+    width: 0;
+    height: 0;
+    border: solid 10px;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(90px, -20px);
 }
