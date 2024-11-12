@@ -81,7 +81,7 @@ body ::selection {
 }
 
 .chart-section {
-    padding: 8px;
+    padding: 16px 20px;
     border: 1px solid grey;
 }
 
@@ -115,7 +115,7 @@ body ::selection {
 }
 
 .chart-title {
-    font-family: 16px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -186,4 +186,24 @@ body ::selection {
 
 .status-info {
     background-color: #2196f3;
+}
+
+.chart-indicator-tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 10%);
+    border-radius: 4px;
+    padding: 16px;
+    width: 180px;
+    z-index: 1000;
+    font-size: 14px;
+    background-color: white;
+    border: 1px solid gray;
+    height: 120px;
+    filter: drop-shadow(lightgray 1px 1px 1px);
+}
+
+.tooltip-date {
+    padding-bottom: 8px;
 }

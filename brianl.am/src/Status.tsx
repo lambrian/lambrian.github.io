@@ -1,5 +1,5 @@
 import './Status.css'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import statuses from './notion-data.json'
 
 const getChartIndicator = (location: string) => {
@@ -17,11 +17,45 @@ const getChartRel = (index: number, total: number) => {
     return `rel-${quarter}`
 }
 
+export const ChartIndicator = ({
+    index,
+    page,
+}: {
+    index: number
+    page: { location: string; date: string; rel: string }
+}) => {
+    const [isTooltipVisible, setTooltipVisible] = useState(false)
+    return (
+        <div
+            className={`chart-indicator ${getChartIndicator(page.location)} ${page.rel}`}
+            onMouseEnter={() => setTooltipVisible(true)}
+            onMouseLeave={() => setTooltipVisible(false)}
+            onFocus={() => setTooltipVisible(true)}
+            onBlur={() => setTooltipVisible(false)}
+            aria-describedby="tooltip"
+            style={{ position: 'relative' }}
+        >
+            {isTooltipVisible && (
+                <div
+                    className="chart-indicator-tooltip"
+                    style={{
+                        whiteSpace: 'nowrap',
+                    }}
+                >
+                    <div className="tooltip-date">{page.date}</div>
+                    <div className="tooltip-summary">{page.location}</div>
+                </div>
+            )}
+        </div>
+    )
+}
+
 export const StatusPage = () => {
     const displayedStatuses = useMemo(() => {
-        return statuses.results.map((page) => ({
+        return statuses.results.map((page, i) => ({
             date: page.properties.Date.formula.string,
             location: page.properties.Location.select.name,
+            rel: getChartRel(i, statuses.results.length),
         }))
     }, [])
 
@@ -34,9 +68,7 @@ export const StatusPage = () => {
                         <div className="chart-title">Location</div>
                         <div className="chart">
                             {displayedStatuses.map((page, i) => (
-                                <div
-                                    className={`chart-indicator ${getChartIndicator(page.location)} ${getChartRel(i, displayedStatuses.length)}`}
-                                ></div>
+                                <ChartIndicator index={i} page={page} />
                             ))}
                         </div>
                     </div>
