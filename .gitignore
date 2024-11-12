@@ -15,6 +15,7 @@ production
 
 #Environment
 **/.env
+**/notion-data.json
 
 # dependencies
 **/node_modules
