@@ -62,7 +62,7 @@
     "lint-staged": {
         "*.{js,jsx,ts,tsx,scss,md}": [
             "prettier --write",
-            "eslint --fix"
+            "eslint --fix --max-warnings=0"
         ]
     }
 }
