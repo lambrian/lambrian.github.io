@@ -59,10 +59,18 @@ jobs:
               run: |
                   python analyze.py
 
-            - name: Fetch Notion Board Data
+            - name: Upload Notion Board Data
               working-directory: notion-data
               env:
                   NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
               run: |
                   echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
                   npm run upload-boards
+
+            - name: Fetch Notion Board Data
+              working-directory: notion-data
+              env:
+                  NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
+              run: |
+                  echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
+                  npm run fetch-boards
