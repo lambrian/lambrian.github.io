@@ -6,7 +6,10 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/index.ts",
+    "fetch-status": "ts-node src/status.ts",
+    "download-board-img": "ts-node src/download-board-img.ts",
+    "upload-boards": "ts-node src/upload-boards.ts",
+    "fetch-boards": "ts-node src/fetch-boards.ts",
     "typecheck": "tsc --noEmit",
     "build": "tsc",
     "format": "prettier --write src/**/*.ts"
