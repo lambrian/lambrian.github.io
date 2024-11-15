@@ -33,7 +33,7 @@ jobs:
                   NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
               run: |
                   echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
-                  npm run start
+                  npm run fetch-status
 
             - name: Deploy
               env:
