@@ -1,19 +1,38 @@
-// import { Client } from '@notionhq/client'
+import { Client } from '@notionhq/client'
 import * as fs from 'fs'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
-// const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
-
 async function main() {
     // read json of output
     // write back to notion
+    const notion = new Client({ auth: process.env.NOTION_TOKEN })
     const outputJson = fs.readFileSync('../queens-image-analysis/output.json', {
         encoding: 'utf8',
         flag: 'r',
     })
-    console.log(JSON.parse(outputJson))
+    const pageToBoard = JSON.parse(outputJson)
+    for (const page in pageToBoard) {
+        console.log(page, pageToBoard[page])
+
+        const pageId = page
+        const response = await notion.pages.update({
+            page_id: pageId,
+            properties: {
+                'Color Array': {
+                    rich_text: [
+                        {
+                            text: {
+                                content: JSON.stringify(pageToBoard[page]),
+                            },
+                        },
+                    ],
+                },
+            },
+        })
+        console.log(response)
+    }
 }
 
 main()
