@@ -4,6 +4,7 @@ on:
     push:
         branches:
             - master
+            - dev/augment-deploy-script
     schedule:
         - cron: '0 11 * * 0,1,2,3,4,5,6'
 
@@ -35,13 +36,32 @@ jobs:
                   echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
                   npm run fetch-status
 
-            - name: Deploy
+            - name: Fetch Notion Board Images
+              working-directory: notion-data
               env:
-                  NAME: lambrian
-                  EMAIL: brianlam93@gmail.com
+                  NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
               run: |
-                  git config --global user.email $EMAIL
-                  git config --global user.name $NAME
-                  git remote set-url origin https://$NAME:${{ secrets.PAT_TOKEN }}@github.com/lambrian/lambrian.github.io.git
-                  npm run deploy
-              working-directory: brianl.am
+                  echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
+                  npm run download-board-img
+
+            - name: setup python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: 3.8 #install the python needed
+            - name: Install dependencies
+                run: |
+                    python -m pip install --upgrade pip
+                    if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+            - name: Analyze Notion Board Data
+              working-directory: queens-image-analysis
+              run: |
+                  python analyze.py
+
+            - name: Fetch Notion Board Data
+              working-directory: notion-data
+              env:
+                  NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
+              run: |
+                  echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
+                  npm run upload-boards
