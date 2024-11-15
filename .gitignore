@@ -16,6 +16,8 @@ production
 #Environment
 **/.env
 **/notion-data.json
+**/board_img/*
+queens-image-analysis/output.json
 
 # dependencies
 **/node_modules
