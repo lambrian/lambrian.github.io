@@ -15,9 +15,12 @@ async function main2() {
         database_id: QUEENS_DB_ID,
     })
 
-    fs.writeFileSync('test.json', JSON.stringify(response))
     const pages = response.results.map((object) => object.id)
 
+    const outputDir = '../queens-image-analysis/board_img'
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir)
+    }
     for (let i = 0; i < pages.length; i++) {
         const pageId = pages[i]
         const response2: any = await notion.pages.retrieve({
