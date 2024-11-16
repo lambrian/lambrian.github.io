@@ -14,10 +14,8 @@ async function main() {
     })
     const pageToBoard = JSON.parse(outputJson)
     for (const page in pageToBoard) {
-        console.log(page, pageToBoard[page])
-
         const pageId = page
-        const response = await notion.pages.update({
+        await notion.pages.update({
             page_id: pageId,
             properties: {
                 'Color Array': {
@@ -31,7 +29,6 @@ async function main() {
                 },
             },
         })
-        console.log(response)
     }
 }
 
