@@ -30,10 +30,13 @@ async function main2() {
             page_id: pageId,
         })
         const date = response2.properties.Date?.date?.start
-        const boardStr =
-            response2.properties['Color Array']?.rich_text[0].plain_text
-        dateToBoard.push({ date, grid: JSON.parse(boardStr) })
+        const colorArrayVal = response2.properties['Color Array']?.rich_text
+        if (date && colorArrayVal.length > 0) {
+            const boardStr = colorArrayVal[0].plain_text
+            dateToBoard.push({ date, grid: JSON.parse(boardStr) })
+        }
     }
+
     fs.writeFileSync(outputFile, JSON.stringify(dateToBoard))
     console.log('Done.')
 }
