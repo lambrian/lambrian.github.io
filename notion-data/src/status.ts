@@ -20,10 +20,19 @@ async function main() {
             },
         ],
     })
+    const result = []
+    const pages: any[] = response.results
+    for (let i = 0; i < pages.length; i++) {
+        const page = pages[i]
+        result.push({
+            date: page?.properties.Date.formula.string,
+            location: page.properties.Location.select.name,
+        })
+    }
 
     fs.writeFileSync(
         '../brianl.am/src/notion-data.json',
-        JSON.stringify(response)
+        JSON.stringify(result)
     )
     console.log('Done.')
 }
