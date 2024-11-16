@@ -49,10 +49,10 @@ export const ChartIndicator = ({
 
 export const StatusPage = () => {
     const displayedStatuses = useMemo(() => {
-        return statuses.results.map((page, i) => ({
-            date: page.properties.Date.formula.string,
-            location: page.properties.Location.select.name,
-            rel: getChartRel(i, statuses.results.length),
+        return statuses.map((page, i) => ({
+            date: page.date,
+            location: page.location,
+            rel: getChartRel(i, statuses.length),
         }))
     }, [])
 
