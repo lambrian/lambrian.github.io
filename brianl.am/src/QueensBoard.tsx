@@ -10,16 +10,14 @@ declare module 'react' {
     }
 }
 
-const getDisplayState = (displayState: number) => {
+const getDisplayState = (displayState: number, isWin: boolean) => {
     const currDisplay = displayState % 3
-    switch (currDisplay) {
-        case 1:
-            return <>x</>
-        case 2:
-            return <>{String.fromCodePoint(Number('128081'))}</>
-        default:
-            return <></>
+    if (currDisplay === 1) {
+        return <>x</>
+    } else if (currDisplay === 2) {
+        return <>{String.fromCodePoint(Number('128081'))}</>
     }
+    return <></>
 }
 interface CellProps {
     color: number
@@ -65,9 +63,11 @@ const Cell = (props: CellProps) => {
     return (
         <div
             onClick={() => props.setDisplay(props.index, props.display + 1)}
-            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''} ${props.isWin ? 'cell-win' : ''}`}
+            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''} ${props.isWin ? 'cell-win' : ''} ${props.display === 1 ? 'ruled' : ''} ${props.display === 2 ? 'queen' : ''}`}
         >
-            <span className="content">{getDisplayState(props.display)}</span>
+            <span className="content">
+                {getDisplayState(props.display, props.isWin)}
+            </span>
         </div>
     )
 }
@@ -171,7 +171,12 @@ const validateDisplayState = (
 
 const QueensBoardInner = (props: { board: number[] }) => {
     const sideLength = Math.sqrt(props.board.length)
-    const [displayState, setDisplayState] = useState(new Map())
+    const key = [5, 16, 21, 33, 36, 49, 56, 71] // , 73]
+    const starterMap = new Map()
+    for (let i = 0; i < key.length; i++) {
+        starterMap.set(key[i], 2)
+    }
+    const [displayState, setDisplayState] = useState(starterMap) // new Map())
 
     const [undoStack, setUndoStack] = useState<
         { index: number; prevValue: number }[]

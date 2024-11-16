@@ -80,17 +80,21 @@
     transition: border-width 2s ease 0s;
 }
 
-.cell-win {
-    border-width: 0;
+.ruled > * {
+    opacity: 100%;
+    transition: opacity 2s ease 2s;
+}
+.cell-win.ruled > * {
+    opacity: 0%;
 }
 
-.cell > * {
+.queen > * {
     transition:
         filter 2s ease 3s,
         transform 2s ease 5s;
 }
 
-.cell-win > * {
+.cell-win.queen > * {
     animation: grow-shrink 3s linear 1s 1 alternate;
     filter: grayscale(100%);
     transform: translateY(calc(-1 * var(--num-row) * (var(--cell-size) + 2px)));
