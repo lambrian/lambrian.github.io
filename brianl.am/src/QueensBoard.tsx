@@ -1,9 +1,8 @@
 import React from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
-import { BOARDS } from './boards'
+import { useParams } from 'react-router-dom'
 import './queens.css'
 import { useCallback, useMemo, useState } from 'react'
-import BOARDS_NOTION from './board-data.json'
+import BOARDS from './board-data.json'
 declare module 'react' {
     interface CSSProperties {
         '--length'?: number
@@ -71,17 +70,12 @@ const Cell = (props: CellProps) => {
 
 export const QueensBoard = () => {
     const { date } = useParams()
-    const [searchParams] = useSearchParams()
-    let data = BOARDS
-    if (searchParams.get('useNotion')) {
-        data = BOARDS_NOTION
-    }
     const matchingBoard = useMemo(() => {
         if (!date) {
             return null
         }
-        return data.find((board) => board.date === date)
-    }, [data, date])
+        return BOARDS.find((board) => board.date === date)
+    }, [date])
 
     if (!matchingBoard) {
         return <div>Not Found</div>
