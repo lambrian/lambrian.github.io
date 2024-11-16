@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import './queens.css'
 import { useCallback, useMemo, useState } from 'react'
 import BOARDS from './board-data.json'
+
 declare module 'react' {
     interface CSSProperties {
         '--length'?: number
@@ -33,6 +34,7 @@ interface CellProps {
 const getCellBorder = (index: number, grid: number[]): string => {
     const sideLength = Math.sqrt(grid.length)
     let classes = []
+    classes.push(`row-${Math.floor(index / Math.sqrt(grid.length))}`)
 
     if (index % sideLength > 0 && grid[index - 1] !== grid[index]) {
         classes.push('border-left')
@@ -56,7 +58,6 @@ const getCellBorder = (index: number, grid: number[]): string => {
         classes.push('border-bottom')
     }
 
-    classes.push(`row-${Math.floor(index % Math.sqrt(grid.length))}`)
     return classes.join(' ')
 }
 
@@ -171,7 +172,7 @@ const validateDisplayState = (
 const QueensBoardInner = (props: { board: number[] }) => {
     const sideLength = Math.sqrt(props.board.length)
     const [displayState, setDisplayState] = useState(new Map())
-    console.log(displayState)
+
     const [undoStack, setUndoStack] = useState<
         { index: number; prevValue: number }[]
     >([])
