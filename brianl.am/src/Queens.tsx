@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { QueenBoard } from './boards'
-import BOARDS_NOTION from './board-data.json'
+import BOARDS from './board-data.json'
 
 const QUEEN_EMOJI = String.fromCodePoint(Number('128081'))
 export const Queens = () => {
@@ -12,7 +12,7 @@ export const Queens = () => {
                 <span className="decoration">{QUEEN_EMOJI}</span>
             </div>
             <div className="queens-list">
-                {BOARDS_NOTION.map((board: QueenBoard) => (
+                {BOARDS.map((board: QueenBoard) => (
                     <div className="game-option">
                         <Link to={`/queens/${board.date}`}>{board.date}</Link>
                     </div>

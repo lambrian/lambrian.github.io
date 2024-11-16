@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import './queens.css'
 import { useCallback, useMemo, useState } from 'react'
-import BOARDS_NOTION from './board-data.json'
+import BOARDS from './board-data.json'
 declare module 'react' {
     interface CSSProperties {
         '--length'?: number
@@ -74,7 +74,7 @@ export const QueensBoard = () => {
         if (!date) {
             return null
         }
-        return BOARDS_NOTION.find((board) => board.date === date)
+        return BOARDS.find((board) => board.date === date)
     }, [date])
 
     if (!matchingBoard) {
