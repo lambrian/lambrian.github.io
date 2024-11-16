@@ -59,12 +59,36 @@
     border-radius: 4px;
 }
 
+@keyframes grow-shrink {
+    0% {
+        font-size: calc(var(--cell-size) / 2);
+    }
+    50% {
+        font-size: calc(var(--cell-size) / 1.75);
+    }
+    100% {
+        font-size: calc(var(--cell-size) / 2);
+    }
+}
+
 .cell {
     background-color: var(--cell-color);
     display: inline-block;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* top: calc(var(--cell-size) / 2); */
+.cell > * {
+    transition:
+        filter 2s ease 3s,
+        transform 2s ease 4s;
+}
+.cell-win > * {
+    animation: grow-shrink 3s linear 1s 1 alternate;
+    filter: grayscale(100%);
+    transform: rotate(180deg);
 }
 
 .invalid-cell {
