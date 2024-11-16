@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
-import { QueenBoard } from './boards'
 import BOARDS from './board-data.json'
+
+type QueenBoard = {
+    date: string
+    grid: number[]
+}
 
 const QUEEN_EMOJI = String.fromCodePoint(Number('128081'))
 export const Queens = () => {
