@@ -18,6 +18,12 @@ async function main2() {
 
     const response = await notion.databases.query({
         database_id: QUEENS_DB_ID,
+        sorts: [
+            {
+                property: 'Date',
+                direction: 'descending',
+            },
+        ],
     })
 
     const pages = response.results.map((object) => object.id)
