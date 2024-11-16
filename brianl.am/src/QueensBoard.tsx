@@ -27,6 +27,7 @@ interface CellProps {
     display: number
     setDisplay: (index: number, newVal: number) => void
     isInvalid: boolean
+    isWin: boolean
 }
 
 const getCellBorder = (index: number, grid: number[]): string => {
@@ -54,6 +55,8 @@ const getCellBorder = (index: number, grid: number[]): string => {
     ) {
         classes.push('border-bottom')
     }
+
+    classes.push(`row-${Math.floor(index % Math.sqrt(grid.length))}`)
     return classes.join(' ')
 }
 
@@ -61,9 +64,9 @@ const Cell = (props: CellProps) => {
     return (
         <div
             onClick={() => props.setDisplay(props.index, props.display + 1)}
-            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''}`}
+            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''} ${props.isWin ? 'cell-win' : ''}`}
         >
-            {getDisplayState(props.display)}
+            <span className="content">{getDisplayState(props.display)}</span>
         </div>
     )
 }
@@ -167,7 +170,14 @@ const validateDisplayState = (
 
 const QueensBoardInner = (props: { board: number[] }) => {
     const sideLength = Math.sqrt(props.board.length)
-    const [displayState, setDisplayState] = useState(new Map())
+    const starterMap = new Map()
+    const key = [5, 16, 21, 33, 36, 49, 56, 71] // last = 73
+    for (let i = 0; i < key.length; i++) {
+        starterMap.set(key[i], 2)
+    }
+
+    const [displayState, setDisplayState] = useState(starterMap)
+    console.log(displayState)
     const [undoStack, setUndoStack] = useState<
         { index: number; prevValue: number }[]
     >([])
@@ -187,6 +197,16 @@ const QueensBoardInner = (props: { board: number[] }) => {
             setInvalidState(validateDisplayState(props.board, result))
         },
         [props.board, displayState, undoStack, setUndoStack]
+    )
+
+    const numberQueens = useMemo(() => {
+        return Array.from(displayState.values()).filter((val) => val === 2)
+            .length
+    }, [displayState])
+
+    const gameFinished = useMemo(
+        () => numberQueens === sideLength && invalidState.size === 0,
+        [sideLength, numberQueens, invalidState]
     )
 
     const undo = useCallback(() => {
@@ -217,6 +237,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
                             display={displayState.get(i) ?? 0}
                             setDisplay={setDisplayStateImpl}
                             isInvalid={showInvalidState && invalidState.has(i)}
+                            isWin={gameFinished}
                         ></Cell>
                     ))}
                 </div>
