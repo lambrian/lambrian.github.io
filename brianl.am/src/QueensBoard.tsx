@@ -65,7 +65,7 @@ const Cell = (props: CellProps) => {
     return (
         <div
             onClick={() => props.setDisplay(props.index, props.display + 1)}
-            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''} ${props.isWin ? 'cell-win' : ''}`}
+            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''} ${props.isWin ? 'cell-win' : ''} ${props.display === 1 ? 'ruled' : ''} ${props.display === 2 ? 'queen' : ''}`}
         >
             <span className="content">{getDisplayState(props.display)}</span>
         </div>
