@@ -10,7 +10,7 @@ declare module 'react' {
     }
 }
 
-const getDisplayState = (displayState: number, isWin: boolean) => {
+const getDisplayState = (displayState: number) => {
     const currDisplay = displayState % 3
     switch (currDisplay) {
         case 1:
