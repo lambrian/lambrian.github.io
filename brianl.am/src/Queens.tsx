@@ -29,13 +29,16 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
     for (let i = 1; i < firstDayOfMonth.weekday; i++) {
         datesToRender.push({ str: '' })
     }
+    const today = DateTime.local()
+        .setZone('America/Los_Angeles')
+        .toFormat('yyyy-MM-dd')
     for (let i = 1; i <= daysInMonth; i++) {
-        const matchingBoard = dates.find(
-            (board) =>
-                board.date ===
-                firstDayOfMonth.plus({ days: i - 1 }).toFormat('yyyy-MM-dd')
-        )
-        datesToRender.push({ str: i, board: matchingBoard })
+        const currDay = firstDayOfMonth
+            .plus({ days: i - 1 })
+            .toFormat('yyyy-MM-dd')
+        const matchingBoard = dates.find((board) => board.date === currDay)
+        const isToday = currDay === today
+        datesToRender.push({ str: i, board: matchingBoard, isToday })
     }
     const days = ['S', 'M', 'T', 'W', 'Th', 'F', 'S']
     return (
@@ -48,7 +51,9 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
                     <div className="date weekday-title">{day}</div>
                 ))}
                 {datesToRender.map((date) => (
-                    <div className={`date ${date.board ? 'has-board' : ''}`}>
+                    <div
+                        className={`date ${date.board ? 'has-board' : ''} ${date.isToday ? 'today' : ''}`}
+                    >
                         {date.board ? (
                             <Link to={`/queens/${date.board.date}`}>
                                 {date.str}
