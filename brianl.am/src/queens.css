@@ -82,7 +82,7 @@
 
 .ruled > * {
     opacity: 100%;
-    transition: opacity 2s ease 2s;
+    transition: opacity 0.5s ease 1s;
 }
 .cell-win.ruled > * {
     opacity: 0%;
@@ -95,8 +95,7 @@
 }
 
 .cell-win.queen > * {
-    animation: grow-shrink 3s linear 1s 1 alternate;
-    filter: grayscale(100%);
+    animation: grow-shrink 1s ease-in 1s 2 alternate;
     transform: translateY(calc(-1 * var(--num-row) * (var(--cell-size) + 2px)));
 }
 

@@ -171,12 +171,25 @@ const validateDisplayState = (
 
 const QueensBoardInner = (props: { board: number[] }) => {
     const sideLength = Math.sqrt(props.board.length)
-    const key = [5, 16, 21, 33, 36, 49, 56, 71] // , 73]
-    const starterMap = new Map()
-    for (let i = 0; i < key.length; i++) {
-        starterMap.set(key[i], 2)
-    }
-    const [displayState, setDisplayState] = useState(starterMap) // new Map())
+    const [displayState, setDisplayState] = useState(
+        new Map([
+            [13, 2],
+            [26, 0],
+            [25, 2],
+            [32, 2],
+            [44, 2],
+            [47, 0],
+            [46, 2],
+            [57, 2],
+            [78, 2],
+            [63, 2],
+            [36, 1],
+            [37, 1],
+            [38, 1],
+            [45, 1],
+            [29, 1],
+        ])
+    )
 
     const [undoStack, setUndoStack] = useState<
         { index: number; prevValue: number }[]
