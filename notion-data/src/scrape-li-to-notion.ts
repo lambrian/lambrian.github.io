@@ -70,7 +70,9 @@ async function main() {
 
     const latestPage: any = response.results.length && response.results.at(0)
     const latestDate = latestPage.properties.Date.date.start
-    const todayDate = DateTime.now().toFormat('yyyy-MM-dd')
+    const todayDate = DateTime.local()
+        .setZone('America/Los_Angeles')
+        .toFormat('yyyy-MM-dd')
     if (latestDate === todayDate) {
         console.log('Notion already has a row for today.')
         return
