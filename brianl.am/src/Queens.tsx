@@ -14,7 +14,8 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
         return <></>
     }
     const firstDayOfMonth = currMonth.startOf('month')
-    const weeksinMonth = Math.floor((firstDayOfMonth.weekday + daysInMonth) / 7)
+    const weeksinMonth = Math.ceil((firstDayOfMonth.weekday + daysInMonth) / 7)
+    console.log(firstDayOfMonth.toString(), weeksinMonth)
 
     // Get the first day of the current month
     console.log(
@@ -28,22 +29,31 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
     for (let i = 1; i < firstDayOfMonth.weekday; i++) {
         datesToRender.push({ str: '' })
     }
+    const today = DateTime.local()
+        .setZone('America/Los_Angeles')
+        .toFormat('yyyy-MM-dd')
     for (let i = 1; i <= daysInMonth; i++) {
-        const matchingBoard = dates.find(
-            (board) =>
-                board.date ===
-                firstDayOfMonth.plus({ days: i - 1 }).toFormat('yyyy-MM-dd')
-        )
-        datesToRender.push({ str: i, board: matchingBoard })
+        const currDay = firstDayOfMonth
+            .plus({ days: i - 1 })
+            .toFormat('yyyy-MM-dd')
+        const matchingBoard = dates.find((board) => board.date === currDay)
+        const isToday = currDay === today
+        datesToRender.push({ str: i, board: matchingBoard, isToday })
     }
+    const days = ['S', 'M', 'T', 'W', 'Th', 'F', 'S']
     return (
         <div className="calendar-wrapper">
             <div className="calendar-title">
                 {DateTime.fromISO(month).toFormat('MMMM yyyy')}
             </div>
-            <div className="calendar-view">
+            <div className={`calendar-view weeks-${weeksinMonth}`}>
+                {days.map((day) => (
+                    <div className="date weekday-title">{day}</div>
+                ))}
                 {datesToRender.map((date) => (
-                    <div className={`date ${date.board ? 'has-board' : ''}`}>
+                    <div
+                        className={`date ${date.board ? 'has-board' : ''} ${date.isToday ? 'today' : ''}`}
+                    >
                         {date.board ? (
                             <Link to={`/queens/${date.board.date}`}>
                                 {date.str}

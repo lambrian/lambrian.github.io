@@ -284,9 +284,10 @@
 }
 
 .calendar-view {
+    --num-weeks: 4;
     display: grid;
     grid-template-columns: repeat(7, 35px);
-    grid-template-rows: repeat(5, 35px);
+    grid-template-rows: repeat(calc(var(--num-weeks) + 1), 35px);
     row-gap: 4px;
     column-gap: 4px;
 }
@@ -302,6 +303,26 @@
     background-color: rgba(255, 215, 0, 0.7);
 }
 
+.today {
+    background-color: rgba(255, 20, 0, 0.7);
+}
+
 .has-board > a:hover {
     color: white;
+}
+
+.weekday-title {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.weeks-4 {
+    --num-weeks: 4;
+}
+
+.weeks-5 {
+    --num-weeks: 5;
+}
+
+.weeks-6 {
+    --num-weeks: 6;
 }
