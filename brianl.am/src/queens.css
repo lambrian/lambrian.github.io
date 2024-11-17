@@ -5,20 +5,37 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding: 36px;
 }
+
+:root {
+    --month-columns: 3;
+}
+
+@media (max-width: 1280px) {
+    :root {
+        --month-columns: 1;
+    }
+}
+
 .queens-list {
     padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(var(--month-columns), 1fr);
+    column-gap: 36px;
 }
 
 .game-title {
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 36px;
     padding: 12px 0;
 }
 
 .game-title > .decoration {
     padding: 0 8px;
+    font-size: 24px;
+    filter: grayscale(0.1);
 }
 
 .game-option {
