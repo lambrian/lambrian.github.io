@@ -27,6 +27,14 @@ jobs:
               run: npm install
               working-directory: notion-data
 
+            - name: Fetch Today Queens Save to Notion
+              working-directory: notion-data
+              env:
+                  NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
+              run: |
+                  echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
+                  npm run scrape-li
+
             - name: Fetch Notion Data
               working-directory: notion-data
               env:
@@ -34,37 +42,6 @@ jobs:
               run: |
                   echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
                   npm run fetch-status
-
-            - name: Fetch Notion Board Images
-              working-directory: notion-data
-              env:
-                  NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
-              run: |
-                  echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
-                  npm run download-board-img
-
-            - name: setup python
-              uses: actions/setup-python@v3
-              with:
-                  python-version: 3.8 #install the python needed
-            - name: Install dependencies
-              working-directory: queens-image-analysis
-              run: |
-                  python3 -m pip install --upgrade pip
-                  if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-            - name: Analyze Notion Board Data
-              working-directory: queens-image-analysis
-              run: |
-                  python analyze.py
-
-            - name: Upload Notion Board Data
-              working-directory: notion-data
-              env:
-                  NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
-              run: |
-                  echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
-                  npm run upload-boards
 
             - name: Fetch Notion Board Data
               working-directory: notion-data
