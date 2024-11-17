@@ -12,12 +12,14 @@ declare module 'react' {
 
 const getDisplayState = (displayState: number, isWin: boolean) => {
     const currDisplay = displayState % 3
-    if (currDisplay === 1) {
-        return <>x</>
-    } else if (currDisplay === 2) {
-        return <>{String.fromCodePoint(Number('128081'))}</>
+    switch (currDisplay) {
+        case 1:
+            return <>x</>
+        case 2:
+            return <>{String.fromCodePoint(Number('128081'))}</>
+        default:
+            return <></>
     }
-    return <></>
 }
 interface CellProps {
     color: number
