@@ -270,3 +270,38 @@
 .border-bottom {
     border-bottom: var(--cell-border);
 }
+
+.calendar-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.calendar-title {
+    text-align: center;
+    padding: 18px 12px;
+    font-weight: 500;
+}
+
+.calendar-view {
+    display: grid;
+    grid-template-columns: repeat(7, 35px);
+    grid-template-rows: repeat(5, 35px);
+    row-gap: 4px;
+    column-gap: 4px;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 28px;
+}
+
+.has-board {
+    background-color: rgba(255, 215, 0, 0.7);
+}
+
+.has-board > a:hover {
+    color: white;
+}
