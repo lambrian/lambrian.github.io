@@ -15,6 +15,8 @@ async function fetchTodayGame() {
     if (iframe) {
         await iframe.waitForSelector('body')
         const grid = await iframe.$('#queens-grid')
+        await iframe.waitForSelector('#ember21')
+        await iframe.click('#ember21')
         const cells = await grid?.evaluate((gridEl) => {
             const children = gridEl.children
             const cellColors: any[] = []
@@ -30,6 +32,7 @@ async function fetchTodayGame() {
             return cellColors
         })
 
+        console.log(JSON.stringify(cells))
         return cells
     }
 
