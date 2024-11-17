@@ -14,7 +14,8 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
         return <></>
     }
     const firstDayOfMonth = currMonth.startOf('month')
-    const weeksinMonth = Math.floor((firstDayOfMonth.weekday + daysInMonth) / 7)
+    const weeksinMonth = Math.ceil((firstDayOfMonth.weekday + daysInMonth) / 7)
+    console.log(firstDayOfMonth.toString(), weeksinMonth)
 
     // Get the first day of the current month
     console.log(
@@ -36,12 +37,16 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
         )
         datesToRender.push({ str: i, board: matchingBoard })
     }
+    const days = ['S', 'M', 'T', 'W', 'Th', 'F', 'S']
     return (
         <div className="calendar-wrapper">
             <div className="calendar-title">
                 {DateTime.fromISO(month).toFormat('MMMM yyyy')}
             </div>
-            <div className="calendar-view">
+            <div className={`calendar-view weeks-${weeksinMonth}`}>
+                {days.map((day) => (
+                    <div className="date weekday-title">{day}</div>
+                ))}
                 {datesToRender.map((date) => (
                     <div className={`date ${date.board ? 'has-board' : ''}`}>
                         {date.board ? (
