@@ -72,6 +72,98 @@ const Cell = (props: CellProps) => {
     )
 }
 
+const findSolution = (board: number[]): Map<number, number> => {
+    const missingQueens: Array<number> = []
+    for (let i: number = 0; i < Math.sqrt(board.length); i++) {
+        missingQueens.push(i)
+    }
+
+    const colorPositions: Map<number, Array<number>> = new Map()
+    missingQueens.forEach((color) => {
+        const currColorPositions = []
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === color) {
+                currColorPositions.push(i)
+            }
+        }
+        colorPositions.set(color, currColorPositions)
+    })
+
+    const currentPlacements: Map<number, number> = new Map([])
+
+    const result = findSolutionInner(
+        board,
+        colorPositions,
+        missingQueens,
+        currentPlacements
+    )
+
+    if (result.result) {
+        return result.solution
+    }
+
+    console.log('Did not find solution')
+    return new Map()
+}
+
+// optimizations to consider later
+// saving set of queen placements that return false
+// color => Set<coordinate> pre-calc
+// given the game board and an existing set of queen placements,
+// arbitrarily pick a color missing a queen
+// for all of the squares within that color
+//      pick it as a queen
+//      run validation
+//      if no existing invalidations, descend with current placement
+//      if there are invalid cells, continue
+// if no valid placements are possible given the existing placement, return False
+const findSolutionInner = (
+    board: number[],
+    colorPositions: Map<number, Array<number>>,
+    missingQueenColors: Array<number>,
+    currentPlacements: Map<number, number>
+): { result: true; solution: Map<number, number> } | { result: false } => {
+    if (!missingQueenColors.length) {
+        return { result: true, solution: currentPlacements }
+    }
+
+    const nextQueen = missingQueenColors.pop()
+    if (nextQueen === undefined) {
+        return { result: true, solution: currentPlacements }
+    }
+
+    const nextQueenPositions = colorPositions.get(nextQueen)
+    if (!nextQueenPositions) {
+        // should not happen
+        return { result: false }
+    }
+
+    const positionsToConsider = nextQueenPositions
+    for (let i = 0; i < positionsToConsider.length; i++) {
+        const position = positionsToConsider[i]
+        currentPlacements.set(position, 2)
+        const invalids: Set<number> = validateDisplayState(
+            board,
+            currentPlacements
+        )
+        if (!invalids.size) {
+            const result = findSolutionInner(
+                board,
+                colorPositions,
+                missingQueenColors,
+                currentPlacements
+            )
+            if (result.result) {
+                return { result: true, solution: currentPlacements }
+            }
+        }
+        currentPlacements.delete(position)
+    }
+
+    missingQueenColors.push(nextQueen)
+    return { result: false }
+}
+
 export const QueensBoard = () => {
     const { date } = useParams()
     const matchingBoard = useMemo(() => {
@@ -85,13 +177,24 @@ export const QueensBoard = () => {
         return <div>Not Found</div>
     }
 
-    return <QueensBoardInner board={matchingBoard.grid} />
+    return (
+        <>
+            <QueensBoardInner board={[0]} />
+            <QueensBoardInner
+                board={[0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]}
+            />
+            <QueensBoardInner
+                board={[0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]}
+            />
+            <QueensBoardInner board={matchingBoard.grid} />
+        </>
+    )
 }
 
 const validateDisplayState = (
     board: number[],
     display: Map<number, number>
-) => {
+): Set<number> => {
     // count queens per color region
     // queens = {colorIndex: [true, false]} for every display, if it's 2 and the
     // hasQueen has the color num, then every index with that colorNum is
@@ -138,11 +241,37 @@ const validateDisplayState = (
     display.forEach(
         (state: number, index: number, display: Map<Number, number>) => {
             if (state === 2) {
+                /*
+                // check previous row
+                if (display.get(index - sideLength) === 2) queenIsInvalid = true
+                // check next row
+                if (display.get(index + sideLength) === 2) queenIsInvalid = true
+                // check prev col
+                if (index % sideLength > 0 && display.get(index - 1) === 2) {
+                    queenIsInvalid = true
+                }
+                // check next col
+                if (index % sideLength < sideLength - 1) {
+                    queenIsInvalid = true
+                }
+                */
                 for (let row = -1; row < 2; row++) {
                     for (let col = -1; col < 2; col++) {
                         if (row === 0 && col === 0) {
                             continue
                         }
+
+                        if (col === -1 && index % sideLength === 0) {
+                            continue
+                        }
+
+                        if (
+                            col === 1 &&
+                            index % sideLength === sideLength - 1
+                        ) {
+                            continue
+                        }
+
                         if (display.get(index + row * sideLength + col) === 2) {
                             invalidQueens.add(index)
                         }
@@ -152,7 +281,7 @@ const validateDisplayState = (
         }
     )
 
-    const invalidIndices = new Set()
+    const invalidIndices: Set<number> = new Set()
     for (let row = 0; row < sideLength; row++) {
         for (let col = 0; col < sideLength; col++) {
             if (
@@ -220,6 +349,11 @@ const QueensBoardInner = (props: { board: number[] }) => {
         setInvalidState(new Set())
     }, [setDisplayState, setUndoStack])
 
+    const solve = useCallback(() => {
+        clear()
+        setDisplayState(findSolution(props.board))
+    }, [clear, props.board])
+
     return (
         <>
             <div className={'grid-container'}>
@@ -243,6 +377,9 @@ const QueensBoardInner = (props: { board: number[] }) => {
                 </div>
                 <div className="nav-button" onClick={clear}>
                     Clear
+                </div>
+                <div className="nav-button" onClick={solve}>
+                    Solve
                 </div>
                 <input
                     type="checkbox"
