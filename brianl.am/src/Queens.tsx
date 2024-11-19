@@ -14,19 +14,10 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
         return <></>
     }
     const firstDayOfMonth = currMonth.startOf('month')
-    const weeksinMonth = Math.ceil((firstDayOfMonth.weekday + daysInMonth) / 7)
-    console.log(firstDayOfMonth.toString(), weeksinMonth)
-
-    // Get the first day of the current month
-    console.log(
-        'days, first day, weeks in month',
-        daysInMonth,
-        firstDayOfMonth.weekday,
-        weeksinMonth
-    )
+    const weeksInMonth = Math.ceil((firstDayOfMonth.weekday + daysInMonth) / 7)
 
     const datesToRender = []
-    for (let i = 1; i < firstDayOfMonth.weekday; i++) {
+    for (let i = 0; i < firstDayOfMonth.weekday; i++) {
         datesToRender.push({ str: '' })
     }
     const today = DateTime.local()
@@ -46,7 +37,7 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
             <div className="calendar-title">
                 {DateTime.fromISO(month).toFormat('MMMM yyyy')}
             </div>
-            <div className={`calendar-view weeks-${weeksinMonth}`}>
+            <div className={`calendar-view weeks-${weeksInMonth}`}>
                 {days.map((day) => (
                     <div className="date weekday-title">{day}</div>
                 ))}
