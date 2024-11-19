@@ -31,9 +31,18 @@ interface CellProps {
     isWin: boolean
 }
 
-const getCellBorder = (index: number, grid: number[]): string => {
+const getCellClasses = ({
+    color,
+    grid,
+    index,
+    display,
+    isInvalid,
+    isWin,
+}: CellProps): string => {
     const sideLength = Math.sqrt(grid.length)
-    let classes = []
+    const classes = []
+    classes.push('cell')
+    classes.push(`color-${color}`)
     classes.push(`row-${Math.floor(index / Math.sqrt(grid.length))}`)
 
     if (index % sideLength > 0 && grid[index - 1] !== grid[index]) {
@@ -58,6 +67,20 @@ const getCellBorder = (index: number, grid: number[]): string => {
         classes.push('border-bottom')
     }
 
+    if (isInvalid) {
+        classes.push('invalid-cell')
+    }
+
+    if (isWin) {
+        classes.push('cell-win')
+    }
+
+    if (display === 1) {
+        classes.push('ruled')
+    } else if (display === 2) {
+        classes.push('queen')
+    }
+
     return classes.join(' ')
 }
 
@@ -65,7 +88,7 @@ const Cell = (props: CellProps) => {
     return (
         <div
             onClick={() => props.setDisplay(props.index, props.display + 1)}
-            className={`cell color-${props.color} ${getCellBorder(props.index, props.grid)} ${props.isInvalid ? 'invalid-cell' : ''} ${props.isWin ? 'cell-win' : ''} ${props.display === 1 ? 'ruled' : ''} ${props.display === 2 ? 'queen' : ''}`}
+            className={getCellClasses(props)}
         >
             <span className="content">{getDisplayState(props.display)}</span>
         </div>
@@ -177,18 +200,7 @@ export const QueensBoard = () => {
         return <div>Not Found</div>
     }
 
-    return (
-        <>
-            <QueensBoardInner board={[0]} />
-            <QueensBoardInner
-                board={[0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]}
-            />
-            <QueensBoardInner
-                board={[0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3]}
-            />
-            <QueensBoardInner board={matchingBoard.grid} />
-        </>
-    )
+    return <QueensBoardInner board={matchingBoard.grid} />
 }
 
 const validateDisplayState = (
