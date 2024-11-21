@@ -6,32 +6,13 @@ dotenv.config()
 
 const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
 
-const notion = new Client({
-    auth: process.env.NOTION_TOKEN,
-})
 interface Board {
-    date: string
+    date?: string
     grid: Array<number>
 }
 
-async function fetchBoardFromNotionPage(pageId: string): Promise<Board> {
-    const response2: any = await notion.pages.retrieve({
-        page_id: pageId,
-    })
-    if (!response2.properties) {
-        return { date: '', grid: [] }
-    }
-    const date = response2.properties.Date?.date?.start
-    const colorArrayVal = response2.properties['Color Array']?.rich_text
-    if (date && colorArrayVal.length > 0) {
-        const boardStr = colorArrayVal[0].plain_text
-        return { date, grid: JSON.parse(boardStr) }
-    }
-
-    return { date: '', grid: [] }
-}
-
-async function main2() {
+async function main() {
+    const outputFile = '../brianl.am/src/board-data.json'
     const notion = new Client({
         auth: process.env.NOTION_TOKEN,
     })
@@ -46,22 +27,34 @@ async function main2() {
         ],
     })
 
-    const pages = response.results.map((object) => object.id)
+    const pages: any[] = response.results
+    const boards = pages
+        .map((page): Board => {
+            const colorArrJson = page.properties['Color Array']?.rich_text
+            const date = page.properties.Date?.date?.start
+            if (date && colorArrJson) {
+                try {
+                    const gridStr = colorArrJson[0].plain_text
+                    const grid = JSON.parse(gridStr)
+                    return {
+                        date,
+                        grid,
+                    }
+                } catch (e: any) {
+                    console.log(`Failed while parsing page ${page.id}`)
+                    return { date: '', grid: [] }
+                }
+            }
+            return { date: undefined, grid: [] }
+        })
+        .filter((board: Board) => board.date)
 
-    const outputFile = '../brianl.am/src/board-data.json'
-    console.log(`Fetching ${pages.length} pages`)
-    await Promise.all(
-        pages.map((pageId) => fetchBoardFromNotionPage(pageId))
-    ).then((boards: Array<{ date: string; grid?: Array<number> }>) => {
-        const validBoards = boards.filter((board) => board['date'] !== '')
-        console.log(validBoards)
-        fs.writeFileSync(outputFile, JSON.stringify(validBoards))
-    })
-
+    console.log(`Writing ${boards.length} boards to file.`)
+    fs.writeFileSync(outputFile, JSON.stringify(boards))
     console.log('Done.')
 }
 
-main2()
+main()
     .then(() => process.exit(0))
     .catch((err) => {
         console.error(err)
