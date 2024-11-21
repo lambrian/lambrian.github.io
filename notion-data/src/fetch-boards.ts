@@ -30,11 +30,12 @@ async function main() {
     const pages: any[] = response.results
     const boards = pages
         .map((page): Board => {
-            const colorArrJson = page.properties['Color Array']
+            const colorArrJson = page.properties['Color Array']?.rich_text
             const date = page.properties.Date?.date?.start
             if (date && colorArrJson) {
                 try {
-                    const grid = JSON.parse(colorArrJson)
+                    const gridStr = colorArrJson[0].plain_text
+                    const grid = JSON.parse(gridStr)
                     return {
                         date,
                         grid,
@@ -48,6 +49,7 @@ async function main() {
         })
         .filter((board: Board) => board.date)
 
+    console.log(`Writing ${boards.length} boards to file.`)
     fs.writeFileSync(outputFile, JSON.stringify(boards))
     console.log('Done.')
 }
