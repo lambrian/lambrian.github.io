@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fetch-status": "ts-node src/status.ts",
+    "fetch-status": "ts-node src/fetch-status.ts",
     "download-board-img": "ts-node src/download-board-img.ts",
     "upload-boards": "ts-node src/upload-boards.ts",
     "fetch-boards": "ts-node src/fetch-boards.ts",
