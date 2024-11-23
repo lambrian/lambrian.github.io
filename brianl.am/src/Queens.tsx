@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import BOARDS from './board-data.json'
 import { DateTime } from 'luxon'
+import { useState } from 'react'
 
 type QueenBoard = {
     date: string
@@ -59,7 +60,67 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
     )
 }
 
-const QUEEN_EMOJI = String.fromCodePoint(Number('128081'))
+const TitleCell = (props: { color: number }) => {
+    const [currColor, setCurrColor] = useState(-1)
+    let useColor = props.color
+    if (currColor >= 0) {
+        useColor = currColor
+    }
+
+    return (
+        <div
+            className={`title-cell cell color-${useColor}`}
+            onClick={() => setCurrColor((currColor + 1) % 10)}
+        ></div>
+    )
+}
+const GameTitle = () => {
+    const blocks = [
+        // Q
+        [
+            20, 20, 20, 20, 20, 20, 1, 1, 1, 1, 20, 20, 1, 20, 20, 1, 20, 20, 1,
+            20, 1, 1, 20, 20, 1, 1, 1, 1, 20, 20, 20, 20, 20, 1, 1, 20,
+        ],
+        // U
+        [
+            20, 20, 20, 20, 20, 20, 20, 2, 20, 20, 2, 20, 20, 2, 20, 20, 2, 20,
+            20, 2, 20, 20, 2, 20, 20, 2, 20, 20, 2, 20, 20, 2, 2, 2, 2, 20,
+        ],
+        // E
+        [
+            20, 20, 20, 20, 20, 20, 20, 3, 3, 3, 3, 20, 20, 3, 20, 20, 20, 20,
+            20, 3, 3, 3, 20, 20, 20, 3, 20, 20, 20, 20, 20, 3, 3, 3, 3, 20,
+        ],
+        // E
+        [
+            20, 20, 20, 20, 20, 20, 20, 4, 4, 4, 4, 20, 20, 4, 20, 20, 20, 20,
+            20, 4, 4, 4, 20, 20, 20, 4, 20, 20, 20, 20, 20, 4, 4, 4, 4, 20,
+        ],
+        // N
+        [
+            20, 20, 20, 20, 20, 20, 5, 5, 5, 20, 5, 20, 5, 20, 5, 20, 5, 20, 5,
+            20, 5, 20, 5, 20, 5, 20, 5, 20, 5, 20, 5, 20, 5, 5, 5, 20,
+        ],
+        // S
+        [
+            20, 20, 20, 20, 20, 20, 20, 6, 6, 6, 6, 20, 20, 6, 20, 20, 20, 20,
+            20, 6, 6, 6, 6, 20, 20, 20, 20, 20, 6, 20, 20, 6, 6, 6, 6, 20,
+        ],
+    ]
+    return (
+        <>
+            {blocks.map((colorArr, i) => (
+                <>
+                    <div id={`title-${i}`} className="grid-game-title">
+                        {colorArr.map((i: number) => (
+                            <TitleCell color={i}></TitleCell>
+                        ))}
+                    </div>
+                </>
+            ))}
+        </>
+    )
+}
 export const Queens = () => {
     const months: Map<string, QueenBoard[]> = new Map()
     for (let i = 0; i < BOARDS.length; i++) {
@@ -72,13 +133,11 @@ export const Queens = () => {
         inMonth.push(curr)
         months.set(month.toString(), inMonth)
     }
-    console.log('months', months)
+
     return (
         <div className="game-container">
             <div className="game-title">
-                <span className="decoration">{QUEEN_EMOJI}</span>
-                Queens
-                <span className="decoration">{QUEEN_EMOJI}</span>
+                <GameTitle></GameTitle>
             </div>
             <div className="queens-list">
                 {Array.from(months.entries()).map((curr) => (

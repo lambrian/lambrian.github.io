@@ -27,15 +27,6 @@
 
 .game-title {
     display: flex;
-    align-items: center;
-    font-size: 36px;
-    padding: 12px 0;
-}
-
-.game-title > .decoration {
-    padding: 0 8px;
-    font-size: 24px;
-    filter: grayscale(0.1);
 }
 
 .game-option {
@@ -272,6 +263,10 @@
     /* Soft Coral Pink */
 }
 
+.color-20 {
+    --cell-color: rgba(100, 100, 100, 1);
+}
+
 .border-left {
     border-left: var(--cell-border);
 }
@@ -342,4 +337,24 @@
 
 .weeks-6 {
     --num-weeks: 6;
+}
+
+:root {
+    --title-pixel-side-count: 6;
+    --title-pixel-size: 10px;
+}
+.grid-game-title {
+    display: grid;
+    grid-template-columns: repeat(
+        var(--title-pixel-side-count),
+        var(--title-pixel-size)
+    );
+    grid-template-rows: var(--title-pixel-side-count);
+    gap: 1px;
+    padding: 0 4px;
+}
+
+.title-cell {
+    width: var(--title-pixel-size);
+    height: var(--title-pixel-size);
 }
