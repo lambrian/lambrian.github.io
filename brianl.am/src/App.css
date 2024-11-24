@@ -2,7 +2,7 @@
     --content-wrapper-padding: 120px 120px;
     --title-size: 50px;
     --body-column-count: 4;
-    --body-column-size: 250px;
+    --body-column-size: 300px;
     --base-font-size: 16px;
     --base-line-height: 1.5;
     --base-text-color: #111;
@@ -58,7 +58,7 @@ a:hover {
 
 body {
     font:
-        var(--base-font-size) / var(--base-line-height) 'Helvetica Neue',
+        var(--base-font-size) / var(--base-line-height) 'Roboto Mono',
         sans-serif;
     color: var(--base-text-color);
     background-color: var(--base-background-color);
@@ -82,8 +82,8 @@ body ::selection {
 
 .intro {
     font-size: var(--title-size);
-    font-weight: 600;
-    grid-column: 1 / 3;
+    font-weight: 700;
+    grid-column: 1 / 4;
     align-self: end;
 }
 
