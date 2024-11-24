@@ -73,9 +73,11 @@ export const StatusPage = () => {
                 <div className="section">
                     <div className="section-title">Previous Incidents</div>
                     {displayedStatuses.reverse().map((page) => (
-                        <div>
-                            <div className="date-summary">{page.date}</div>
-                            <div>{page.location}</div>
+                        <div className="summary-day-section">
+                            <div className="summary-date">{page.date}</div>
+                            <div className="summary-detail">
+                                {page.location}
+                            </div>
                         </div>
                     ))}
                 </div>

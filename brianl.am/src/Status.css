@@ -61,9 +61,19 @@
     flex-grow: 1;
 }
 
-.date-summary {
+.summary-day-section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.summary-date {
     border-bottom: 1px solid lightgray;
     padding: 4px 0;
+    font-weight: 500;
+}
+
+.summary-detail {
 }
 
 @media (max-width: 1024px) {
