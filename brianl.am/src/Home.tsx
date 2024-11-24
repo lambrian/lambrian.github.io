@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 export const Home = () => {
     return (
         <div className="content-wrapper">
-            <div className="intro">Hey there, I'm Brian!</div>
+            <div className="intro">Hey there, I'm Brian 👋</div>
             <div className="intro-description">
                 <p>
                     I'm an engineering manager of the team at Figma thinking
