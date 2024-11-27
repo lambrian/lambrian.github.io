@@ -53,9 +53,10 @@ interface Status {
     rel: string
 }
 
-const countTravelDays = (statuses: Array<Status>): number => {
-    return statuses.filter((status) => status.location !== 'San Francisco')
-        .length
+const countTravelDays = (statuses: Array<Status>): string => {
+    return `${
+        statuses.filter((status) => status.location !== 'San Francisco').length
+    } / ${statuses.length}`
 }
 
 export const StatusPage = () => {

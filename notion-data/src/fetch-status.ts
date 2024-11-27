@@ -25,6 +25,7 @@ async function main() {
         date: page?.properties.Date.formula.string,
         location: page.properties.Location.select.name,
     }))
+    result.reverse()
 
     fs.writeFileSync(
         '../brianl.am/src/notion-data.json',
