@@ -16,6 +16,7 @@
 }
 
 :root {
+    --chart-indicator-height: 38px;
     --display-rel-0: none;
     --display-rel-1: none;
     --display-rel-2: none;
@@ -57,7 +58,7 @@
 }
 
 .chart-indicator {
-    height: 38px;
+    height: var(--chart-indicator-height);
     background-color: #dbdbdb;
     flex-grow: 1;
 }
@@ -131,7 +132,19 @@
     flex-grow: 2;
     border-bottom: 1px solid grey;
     margin: 0 20px;
-    transform: translateY(-8px);
+    transform: translateY(-40%);
+}
+
+.left-data {
+    text-align: left;
+}
+
+.center-data {
+    text-align: center;
+}
+
+.right-data {
+    text-align: right;
 }
 
 .status-ok {
@@ -153,7 +166,10 @@
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translate(-50%, 8%);
+    transform: translate(
+        calc(-50% + 9px),
+        calc(var(--chart-indicator-height) + 9px)
+    );
     border-radius: 4px;
     padding: 16px;
     width: 180px;
