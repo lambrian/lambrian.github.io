@@ -16,9 +16,10 @@
 }
 
 :root {
-    --display-rel-0: inherit;
-    --display-rel-1: inherit;
-    --display-rel-2: inherit;
+    --display-rel-0: none;
+    --display-rel-1: none;
+    --display-rel-2: none;
+    --display-rel-3: none;
 }
 
 .page-title {
@@ -76,34 +77,6 @@
 .summary-detail {
 }
 
-@media (max-width: 1024px) {
-    :root {
-        --display-rel-0: inherit;
-        --display-rel-1: inherit;
-        --display-rel-2: none;
-    }
-
-    .page {
-        width: 90%;
-    }
-}
-
-@media (max-width: 600px) {
-    :root {
-        --display-rel-0: inherit;
-        --display-rel-1: none;
-        --display-rel-2: none;
-    }
-
-    .page {
-        width: 100%;
-    }
-
-    .page-wrapper {
-        padding: 0;
-    }
-}
-
 /* [0, 30] days from most recent */
 .rel-0 {
     display: var(--display-rel-0);
@@ -120,12 +93,60 @@
     display: var(--display-rel-2);
 }
 
+.rel-3 {
+    display: var(--display-rel-3);
+}
+
+@media (min-width: 1px) {
+    :root {
+        --display-rel-0: block;
+    }
+}
+
+@media (min-width: 720px) {
+    :root {
+        --display-rel-0: inherit;
+        --display-rel-1: inherit;
+    }
+}
+
+@media (min-width: 900px) {
+    :root {
+        --display-rel-0: inherit;
+        --display-rel-1: inherit;
+        --display-rel-2: inherit;
+    }
+}
+
+@media (min-width: 1200px) {
+    :root {
+        --display-rel-0: inherit;
+        --display-rel-1: inherit;
+        --display-rel-2: inherit;
+        --display-rel-3: inherit;
+    }
+}
+
+.spacer {
+    flex-grow: 2;
+    border-bottom: 1px solid grey;
+    margin: 0 20px;
+    transform: translateY(-8px);
+}
+
 .status-ok {
     background-color: #4caf50;
 }
 
 .status-info {
     background-color: #2196f3;
+}
+
+.chart-metrics {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 .chart-indicator-tooltip {

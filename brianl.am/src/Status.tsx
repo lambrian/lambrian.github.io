@@ -47,6 +47,17 @@ export const ChartIndicator = ({
     )
 }
 
+interface Status {
+    date: string
+    location: string
+    rel: string
+}
+
+const countTravelDays = (statuses: Array<Status>): number => {
+    return statuses.filter((status) => status.location !== 'San Francisco')
+        .length
+}
+
 export const StatusPage = () => {
     const displayedStatuses = useMemo(() => {
         return statuses.map((page, i) => ({
@@ -67,6 +78,25 @@ export const StatusPage = () => {
                             {displayedStatuses.map((page, i) => (
                                 <ChartIndicator index={i} page={page} />
                             ))}
+                        </div>
+                        <div className="chart-metrics">
+                            <div className="metric-rel-3">
+                                {
+                                    displayedStatuses.find(
+                                        (day) => day.rel === 'rel-3'
+                                    )?.date
+                                }
+                            </div>
+                            <div className="spacer"></div>
+                            <div>{`${countTravelDays(displayedStatuses)} days out of San Francisco`}</div>
+                            <div className="spacer"></div>
+                            <div>
+                                {
+                                    displayedStatuses[
+                                        displayedStatuses.length - 1
+                                    ].date
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
