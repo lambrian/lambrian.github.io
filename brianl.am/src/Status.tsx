@@ -143,10 +143,16 @@ const LocationChart = (props: { statuses: Array<Status> }) => {
 }
 
 const IncidentList = (props: { statuses: Array<Status> }) => {
+    const reversedStatuses: Array<Status> = useMemo(() => {
+        const ret = structuredClone(props.statuses)
+        ret.reverse()
+        return ret
+    }, [props])
+
     return (
         <div className="section">
             <div className="section-title">Previous Incidents</div>
-            {statuses.toReversed().map((status) => (
+            {reversedStatuses.map((status) => (
                 <div className="summary-day-section">
                     <div className="summary-date">{status.date}</div>
                     <div className="summary-detail">{status.location}</div>
