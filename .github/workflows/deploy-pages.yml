@@ -33,6 +33,7 @@ jobs:
                   NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
               run: |
                   echo "NOTION_TOKEN=$NOTION_TOKEN" > .env
+                  echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
                   npm run scrape-li
 
             - name: Fetch Notion Data
