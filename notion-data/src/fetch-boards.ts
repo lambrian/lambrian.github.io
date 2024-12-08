@@ -11,6 +11,10 @@ interface Board {
     grid: Array<number>
 }
 
+function getFileKB(filename: string) {
+    return Math.round((fs.statSync(filename).size / 1024) * 100) / 100
+}
+
 async function main() {
     const outputFile = '../brianl.am/src/board-data.json'
     const notion = new Client({
@@ -51,6 +55,7 @@ async function main() {
 
     console.log(`Writing ${boards.length} boards to file.`)
     fs.writeFileSync(outputFile, JSON.stringify(boards))
+    console.log(`File size: ${getFileKB(outputFile)}KB`)
     console.log('Done.')
 }
 
