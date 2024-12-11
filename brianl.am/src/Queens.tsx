@@ -17,8 +17,10 @@ const Calendar = ({ month, dates }: { month: string; dates: QueenBoard[] }) => {
     const firstDayOfMonth = currMonth.startOf('month')
     const weeksInMonth = Math.ceil((firstDayOfMonth.weekday + daysInMonth) / 7)
 
+    // set Sunday to be 0 instead of 7
+    const dayOfFirstDay = firstDayOfMonth.weekday % 7
     const datesToRender = []
-    for (let i = 0; i < firstDayOfMonth.weekday; i++) {
+    for (let i = 0; i < dayOfFirstDay; i++) {
         datesToRender.push({ str: '' })
     }
     const today = DateTime.local()
