@@ -5,8 +5,12 @@ import { DateTime } from 'luxon'
 
 dotenv.config()
 
+const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
+const QUEENS_URL = 'https://www.linkedin.com/games/queens'
+const START_BTN = '#ember18'
+
 async function fetchTodayGame() {
-    const url = 'https://www.linkedin.com/games/queens'
+    const url = QUEENS_URL
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.goto(url, { waitUntil: 'networkidle2' })
@@ -15,8 +19,8 @@ async function fetchTodayGame() {
     if (iframe) {
         await iframe.waitForSelector('body')
         const grid = await iframe.$('#queens-grid')
-        await iframe.waitForSelector('#ember21')
-        await iframe.click('#ember21')
+        await iframe.waitForSelector(START_BTN)
+        await iframe.click(START_BTN)
         const cells = await grid?.evaluate((gridEl) => {
             const children = gridEl.children
             const cellColors: any[] = []
@@ -38,8 +42,6 @@ async function fetchTodayGame() {
 
     return null
 }
-
-const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
 
 const isBoardValid = (cellColors: any) => {
     const sqrtLength = Math.sqrt(cellColors.length)
