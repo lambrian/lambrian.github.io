@@ -24,7 +24,8 @@ async function main() {
     const pages: any[] = response.results
     const result = pages.map((page) => ({
         date: page?.properties.Date.formula.string,
-        location: page.properties.Location.select.name,
+        location:
+            page?.properties?.Location?.select?.name || 'Needs Information',
     }))
     result.reverse()
 
