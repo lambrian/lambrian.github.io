@@ -1,7 +1,7 @@
 import { Client } from '@notionhq/client'
 import * as fs from 'fs'
 import dotenv from 'dotenv'
-import { getFileKB } from './utils.ts'
+import { getFileKB } from './utils'
 
 dotenv.config()
 
