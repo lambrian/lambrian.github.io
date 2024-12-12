@@ -1,10 +1,11 @@
 import { Client } from '@notionhq/client'
 import * as fs from 'fs'
 import dotenv from 'dotenv'
+import { getFileKB } from './utils'
 
 dotenv.config()
 
-const DB_ID = '139413f810be801b916edc5da7e5a7b5'
+const DB_ID = '1f95b4aedadc45308cce02a2be949e73'
 
 async function main() {
     const notion = new Client({
@@ -27,10 +28,9 @@ async function main() {
     }))
     result.reverse()
 
-    fs.writeFileSync(
-        '../brianl.am/src/notion-data.json',
-        JSON.stringify(result)
-    )
+    const outputFile = '../brianl.am/src/notion-data.json'
+    fs.writeFileSync(outputFile, JSON.stringify(result))
+    console.log(`File size: ${getFileKB(outputFile)}KB`)
     console.log('Done.')
 }
 

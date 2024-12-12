@@ -1,6 +1,7 @@
 import { Client } from '@notionhq/client'
 import * as fs from 'fs'
 import dotenv from 'dotenv'
+import { getFileKB } from './utils'
 
 dotenv.config()
 
@@ -9,10 +10,6 @@ const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
 interface Board {
     date?: string
     grid: Array<number>
-}
-
-function getFileKB(filename: string) {
-    return Math.round((fs.statSync(filename).size / 1024) * 100) / 100
 }
 
 async function main() {
