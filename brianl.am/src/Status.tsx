@@ -3,11 +3,11 @@ import {
     Dispatch,
     SetStateAction,
     useCallback,
+    useEffect,
     useMemo,
     useRef,
     useState,
 } from 'react'
-import statuses from './notion-data.json'
 
 const getChartIndicator = (location: string) => {
     if (location === 'San Francisco') {
@@ -112,10 +112,10 @@ const Chart = (props: { statuses: Array<Status> }) => {
                     <div className="triangle-bg"></div>
                     <div className="triangle"></div>
                     <div className="tooltip-date">
-                        {statuses[currentStatusIndex].date}
+                        {props.statuses[currentStatusIndex].date}
                     </div>
                     <div className="tooltip-summary">
-                        {statuses[currentStatusIndex].location}
+                        {props.statuses[currentStatusIndex].location}
                     </div>
                 </div>
             )}
@@ -123,6 +123,9 @@ const Chart = (props: { statuses: Array<Status> }) => {
     )
 }
 const LocationChart = (props: { statuses: Array<Status> }) => {
+    if (!props.statuses.length) {
+        return <></>
+    }
     return (
         <div className="section">
             <div className="chart-section">
@@ -134,7 +137,7 @@ const LocationChart = (props: { statuses: Array<Status> }) => {
                     <div className="center-data">{`${countTravelDays(props.statuses)} days out of San Francisco`}</div>
                     <div className="spacer"></div>
                     <div className="right-data">
-                        {props.statuses[statuses.length - 1].date}
+                        {props.statuses[props.statuses.length - 1].date}
                     </div>
                 </div>
             </div>
@@ -162,12 +165,26 @@ const IncidentList = (props: { statuses: Array<Status> }) => {
     )
 }
 export const StatusPage = () => {
+    const [data, setData] = useState<Array<Status>>([])
     const displayedStatuses = useMemo(() => {
-        return statuses.map((page, i) => ({
+        console.log(data)
+        return data.map((page, i) => ({
             date: page.date,
             location: page.location,
-            rel: getChartRel(i, statuses.length),
+            rel: getChartRel(i, data.length),
         }))
+    }, [data])
+
+    useEffect(() => {
+        fetch('/notion-data.json')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Not Found')
+                }
+                return response.json()
+            })
+            .then((json) => setData(json))
+            .catch((err) => console.error(err))
     }, [])
 
     return (
