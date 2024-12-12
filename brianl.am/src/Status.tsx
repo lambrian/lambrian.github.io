@@ -123,6 +123,9 @@ const Chart = (props: { statuses: Array<Status> }) => {
     )
 }
 const LocationChart = (props: { statuses: Array<Status> }) => {
+    if (!props.statuses.length) {
+        return <></>
+    }
     return (
         <div className="section">
             <div className="chart-section">
@@ -162,13 +165,29 @@ const IncidentList = (props: { statuses: Array<Status> }) => {
     )
 }
 export const StatusPage = () => {
+    const [data] = useState<Array<Status>>([])
     const displayedStatuses = useMemo(() => {
-        return statuses.map((page, i) => ({
+        console.log(data)
+        return data.map((page, i) => ({
             date: page.date,
             location: page.location,
             rel: getChartRel(i, statuses.length),
         }))
+    }, [data])
+
+    /*
+    useEffect(() => {
+        fetch('http://localhost:3000/notion-data.json')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Not Found')
+                }
+                return response.json()
+            })
+            .then((json) => setData(json))
+            .catch((err) => console.error(err))
     }, [])
+*/
 
     return (
         <div className="page-wrapper">
@@ -176,6 +195,7 @@ export const StatusPage = () => {
                 <div className="page-title">Status History</div>
                 <LocationChart statuses={displayedStatuses} />
                 <IncidentList statuses={displayedStatuses} />
+                {JSON.stringify(data)}
             </div>
         </div>
     )
