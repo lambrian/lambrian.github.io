@@ -29,7 +29,7 @@ async function main() {
     }))
     result.reverse()
 
-    const outputFile = '../brianl.am/src/notion-data.json'
+    const outputFile = '../brianl.am/public/notion-data.json'
     fs.writeFileSync(outputFile, JSON.stringify(result))
     console.log(`File size: ${getFileKB(outputFile)}KB`)
     console.log('Done.')
