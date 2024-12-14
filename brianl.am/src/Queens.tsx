@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import BOARDS from './board-data.json'
 import { DateTime } from 'luxon'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-type QueenBoard = {
+export type QueenBoard = {
     date: string
     grid: number[]
 }
@@ -124,9 +123,23 @@ const GameTitle = () => {
     )
 }
 export const Queens = () => {
+    const [data, setData] = useState<Array<QueenBoard>>([])
+    useEffect(() => {
+        fetch('/board-data.json')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Not Found')
+                }
+
+                return response.json()
+            })
+            .then((json) => setData(json))
+            .catch((err) => console.error(err))
+    }, [])
+
     const months: Map<string, QueenBoard[]> = new Map()
-    for (let i = 0; i < BOARDS.length; i++) {
-        const curr = BOARDS[i]
+    for (let i = 0; i < data.length; i++) {
+        const curr = data[i]
         const month = DateTime.fromFormat(curr.date, 'yyyy-MM-dd').startOf(
             'month'
         )

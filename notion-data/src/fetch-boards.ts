@@ -13,7 +13,7 @@ interface Board {
 }
 
 async function main() {
-    const outputFile = '../brianl.am/src/board-data.json'
+    const outputFile = '../brianl.am/public/board-data.json'
     const notion = new Client({
         auth: process.env.NOTION_TOKEN,
     })
