@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import './queens.css'
-import { useCallback, useMemo, useState } from 'react'
-import BOARDS from './board-data.json'
+import { useCallback, useMemo, useState, useEffect } from 'react'
+import { QueenBoard } from './Queens'
 
 declare module 'react' {
     interface CSSProperties {
@@ -189,12 +189,25 @@ const findSolutionInner = (
 
 export const QueensBoard = () => {
     const { date } = useParams()
+    const [data, setData] = useState<Array<QueenBoard>>([])
+    useEffect(() => {
+        fetch('/board-data.json')
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Not Found')
+                }
+
+                return response.json()
+            })
+            .then((json) => setData(json))
+            .catch((err) => console.error(err))
+    }, [])
     const matchingBoard = useMemo(() => {
         if (!date) {
             return null
         }
-        return BOARDS.find((board) => board.date === date)
-    }, [date])
+        return data.find((board) => board.date === date)
+    }, [date, data])
 
     if (!matchingBoard) {
         return <div>Not Found</div>
@@ -207,10 +220,6 @@ const validateDisplayState = (
     board: number[],
     display: Map<number, number>
 ): Set<number> => {
-    // count queens per color region
-    // queens = {colorIndex: [true, false]} for every display, if it's 2 and the
-    // hasQueen has the color num, then every index with that colorNum is
-    // invalid
     const invalidColors = new Set()
     const colorHasQueen = new Set()
     display.forEach(

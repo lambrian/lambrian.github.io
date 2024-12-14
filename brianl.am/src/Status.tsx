@@ -167,7 +167,6 @@ const IncidentList = (props: { statuses: Array<Status> }) => {
 export const StatusPage = () => {
     const [data, setData] = useState<Array<Status>>([])
     const displayedStatuses = useMemo(() => {
-        console.log(data)
         return data.map((page, i) => ({
             date: page.date,
             location: page.location,
