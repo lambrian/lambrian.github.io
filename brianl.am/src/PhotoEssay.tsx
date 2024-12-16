@@ -119,6 +119,7 @@ const Img = (props: ImgProps) => {
                 height: props.height,
             }}
             className="photo"
+            loading="lazy"
             src={props.photo}
             alt={props.photo}
             onLoad={onload}
