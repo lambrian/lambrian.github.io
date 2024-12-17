@@ -3,13 +3,24 @@ import { useDimensions } from './useDimensions'
 import { useParams } from 'react-router-dom'
 import { PHOTO_ESSAYS } from './photo_essays'
 
+export type EssayConfig = {
+    link: string
+    header: string
+    title: string
+    subtitle: string
+    photos: Array<Array<string>>
+}
+
 export const PhotoEssay = () => {
     const { name } = useParams()
-    if (!name || !Object.keys(PHOTO_ESSAYS).includes(name)) {
+    if (!name) {
         return <></>
     }
 
-    const essay = PHOTO_ESSAYS[name]
+    const essay = PHOTO_ESSAYS.find((essay) => essay.link === name)
+    if (!essay) {
+        return <></>
+    }
     return (
         <>
             <div className="cover-container">
