@@ -70,8 +70,10 @@ const PhotoRow = (props: { photos: string[] }) => {
         [props, dimensions2, width]
     )
 
+    const photosetHeight = scaledDimensions?.final_scaled_heights[0]
+
     return (
-        <div className="photoset" ref={ref}>
+        <div className="photoset" ref={ref} style={{ height: photosetHeight }}>
             {props.photos.map((photo: string, i: number) => {
                 return (
                     <Img
