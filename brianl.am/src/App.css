@@ -125,6 +125,7 @@ body ::selection {
     gap: 12px;
     align-self: stretch;
     flex-wrap: wrap;
+    height: 1000px;
 }
 
 .cover-container {
