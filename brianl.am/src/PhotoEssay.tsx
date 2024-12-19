@@ -1,4 +1,11 @@
-import React, { useState, useRef, useMemo } from 'react'
+import React, {
+    useState,
+    useRef,
+    useMemo,
+    SetStateAction,
+    Dispatch,
+    useCallback,
+} from 'react'
 import { useDimensions } from './useDimensions'
 import { useParams } from 'react-router-dom'
 import { PHOTO_ESSAYS } from './photo_essays'
@@ -13,16 +20,48 @@ export type EssayConfig = {
 
 export const PhotoEssay = () => {
     const { name } = useParams()
+    const [lightboxFile, setLightboxFile] = useState('')
+    const [isTransitioningLightbox, setIsTransitioningLightbox] =
+        useState(false)
+
+    const essay = PHOTO_ESSAYS.find((essay) => essay.link === name)
+    const allPhotos = useMemo(() => {
+        if (!essay) return []
+        return essay.photos.reduce((acc: Array<string>, row: Array<string>) =>
+            acc.concat(row)
+        )
+    }, [essay])
+    const findNextImg = useCallback(() => {
+        console.log(lightboxFile)
+        const currIndex = allPhotos.findIndex((photo) => photo === lightboxFile)
+        const nextIndex = (currIndex + 1) % allPhotos.length
+        setIsTransitioningLightbox(true)
+        setTimeout(() => {
+            setIsTransitioningLightbox(false)
+            setLightboxFile(allPhotos[nextIndex])
+        }, 1000)
+    }, [lightboxFile, setLightboxFile, allPhotos])
+    const isLightboxOpen = useMemo(() => !!lightboxFile, [lightboxFile])
     if (!name) {
         return <></>
     }
-
-    const essay = PHOTO_ESSAYS.find((essay) => essay.link === name)
     if (!essay) {
         return <></>
     }
     return (
-        <>
+        <div>
+            <div className={`lightbox ${isLightboxOpen ? 'open' : ''}`}>
+                <div
+                    className="background"
+                    onClick={() => setLightboxFile('')}
+                ></div>
+                <img
+                    className={`${!isTransitioningLightbox ? 'opened' : ''}`}
+                    src={lightboxFile}
+                    alt={lightboxFile}
+                    onClick={() => findNextImg()}
+                />
+            </div>
             <div className="cover-container">
                 <img className="cover" src={essay.header} alt={essay.header} />
             </div>
@@ -30,10 +69,14 @@ export const PhotoEssay = () => {
                 <p className="essay-title">{essay.title}</p>
                 <p className="essay-subtitle">{essay.subtitle}</p>
                 {essay.photos.map((row: string[], i: number) => (
-                    <PhotoRow photos={row} key={i} />
+                    <PhotoRow
+                        photos={row}
+                        key={i}
+                        setLightboxFile={setLightboxFile}
+                    />
                 ))}
             </div>
-        </>
+        </div>
     )
 }
 
@@ -72,7 +115,10 @@ const calculatePhotoDimensions = (
     return { final_scaled_widths, final_scaled_heights }
 }
 
-const PhotoRow = (props: { photos: string[] }) => {
+const PhotoRow = (props: {
+    photos: string[]
+    setLightboxFile: Dispatch<SetStateAction<string>>
+}) => {
     const ref = useRef(null)
     const [dimensions2, setDimensions2] = useState(new Map())
     const { width } = useDimensions(ref)
@@ -94,6 +140,7 @@ const PhotoRow = (props: { photos: string[] }) => {
                         height={scaledDimensions?.final_scaled_heights[i]}
                         dimensions={dimensions2}
                         setDimensions={setDimensions2}
+                        onClick={props.setLightboxFile}
                     />
                 )
             })}
@@ -107,6 +154,7 @@ interface ImgProps {
     height?: number
     dimensions: Map<any, any> | null
     setDimensions: React.Dispatch<React.SetStateAction<Map<any, any>>>
+    onClick: Dispatch<SetStateAction<string>>
 }
 
 const Img = (props: ImgProps) => {
@@ -136,6 +184,10 @@ const Img = (props: ImgProps) => {
             src={props.photo}
             alt={props.photo}
             onLoad={onload}
+            onClick={() => {
+                console.log(`${props.photo}`)
+                props.onClick(props.photo)
+            }}
         />
     )
 }
