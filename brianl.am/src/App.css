@@ -125,7 +125,14 @@ body ::selection {
     gap: 12px;
     align-self: stretch;
     flex-wrap: wrap;
-    height: 1000px;
+    transition: all 2s;
+}
+
+.photoset.loading {
+    height: 800px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(10px);
 }
 
 .cover-container {

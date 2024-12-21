@@ -120,17 +120,18 @@ const PhotoRow = (props: {
     setLightboxFile: Dispatch<SetStateAction<string>>
 }) => {
     const ref = useRef(null)
-    const [dimensions2, setDimensions2] = useState(new Map())
+    const [dimensions, setDimensions] = useState(new Map())
     const { width } = useDimensions(ref)
     const scaledDimensions = useMemo(
-        () => calculatePhotoDimensions(props.photos, dimensions2, width),
-        [props, dimensions2, width]
+        () => calculatePhotoDimensions(props.photos, dimensions, width),
+        [props, dimensions, width]
     )
 
-    const photosetHeight = scaledDimensions?.final_scaled_heights[0]
-
     return (
-        <div className="photoset" ref={ref} style={{ height: photosetHeight }}>
+        <div
+            className={`photoset ${scaledDimensions ? 'loaded' : 'loading'}`}
+            ref={ref}
+        >
             {props.photos.map((photo: string, i: number) => {
                 return (
                     <Img
@@ -138,8 +139,8 @@ const PhotoRow = (props: {
                         photo={photo}
                         width={scaledDimensions?.final_scaled_widths[i]}
                         height={scaledDimensions?.final_scaled_heights[i]}
-                        dimensions={dimensions2}
-                        setDimensions={setDimensions2}
+                        dimensions={dimensions}
+                        setDimensions={setDimensions}
                         onClick={props.setLightboxFile}
                     />
                 )
@@ -184,10 +185,7 @@ const Img = (props: ImgProps) => {
             src={props.photo}
             alt={props.photo}
             onLoad={onload}
-            onClick={() => {
-                console.log(`${props.photo}`)
-                props.onClick(props.photo)
-            }}
+            onClick={() => props.onClick(props.photo)}
         />
     )
 }
