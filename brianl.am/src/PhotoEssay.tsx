@@ -5,6 +5,7 @@ import React, {
     SetStateAction,
     Dispatch,
     useCallback,
+    useEffect,
 } from 'react'
 import { useDimensions } from './useDimensions'
 import { useParams } from 'react-router-dom'
@@ -25,22 +26,54 @@ export const PhotoEssay = () => {
         useState(false)
 
     const essay = PHOTO_ESSAYS.find((essay) => essay.link === name)
+    useEffect(() => {
+        const handleKeyup = (event: KeyboardEvent) => {
+            if (!isLightboxOpen) {
+                return
+            }
+
+            switch (event.key) {
+                case 'ArrowRight':
+                    findNextImg(1)
+                    return
+                case 'ArrowLeft':
+                    findNextImg(-1)
+                    return
+                case 'Escape':
+                    setLightboxFile('')
+                    return
+                default:
+                    console.log(event.key)
+            }
+        }
+
+        window.addEventListener('keyup', handleKeyup)
+
+        return () => {
+            window.removeEventListener('keyup', handleKeyup)
+        }
+    })
     const allPhotos = useMemo(() => {
         if (!essay) return []
         return essay.photos.reduce((acc: Array<string>, row: Array<string>) =>
             acc.concat(row)
         )
     }, [essay])
-    const findNextImg = useCallback(() => {
-        console.log(lightboxFile)
-        const currIndex = allPhotos.findIndex((photo) => photo === lightboxFile)
-        const nextIndex = (currIndex + 1) % allPhotos.length
-        setIsTransitioningLightbox(true)
-        setTimeout(() => {
-            setIsTransitioningLightbox(false)
-            setLightboxFile(allPhotos[nextIndex])
-        }, 1000)
-    }, [lightboxFile, setLightboxFile, allPhotos])
+    const findNextImg = useCallback(
+        (increment: number) => {
+            console.log(lightboxFile)
+            const currIndex = allPhotos.findIndex(
+                (photo) => photo === lightboxFile
+            )
+            const nextIndex = (currIndex + increment) % allPhotos.length
+            setIsTransitioningLightbox(true)
+            setTimeout(() => {
+                setIsTransitioningLightbox(false)
+                setLightboxFile(allPhotos[nextIndex])
+            }, 500)
+        },
+        [lightboxFile, setLightboxFile, allPhotos]
+    )
     const isLightboxOpen = useMemo(() => !!lightboxFile, [lightboxFile])
     if (!name) {
         return <></>
@@ -49,7 +82,7 @@ export const PhotoEssay = () => {
         return <></>
     }
     return (
-        <div>
+        <div onKeyUp={(event) => console.log(event.key)}>
             <div className={`lightbox ${isLightboxOpen ? 'open' : ''}`}>
                 <div
                     className="background"
@@ -59,7 +92,7 @@ export const PhotoEssay = () => {
                     className={`${!isTransitioningLightbox ? 'opened' : ''}`}
                     src={lightboxFile}
                     alt={lightboxFile}
-                    onClick={() => findNextImg()}
+                    onClick={() => findNextImg(1)}
                 />
             </div>
             <div className="cover-container">
