@@ -3,7 +3,7 @@ export const PHOTO_ESSAYS: Array<EssayConfig> = [
     {
         link: 'south-america',
         header: '/img/south-america/DSC02325.jpg',
-        title: 'South America',
+        title: 'Argentina & Brazil',
         subtitle: 'November 2 - December 2, 2024',
         photos: [
             [
@@ -112,7 +112,7 @@ export const PHOTO_ESSAYS: Array<EssayConfig> = [
     {
         header: '/img/berlin/cover.jpg',
         link: 'berlin',
-        title: 'Berlin, Germany',
+        title: 'Berlin',
         subtitle: 'November 23 — December 3, 2023',
         photos: [
             [

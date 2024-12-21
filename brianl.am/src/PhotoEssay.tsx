@@ -64,10 +64,12 @@ export const PhotoEssay = () => {
             </div>
             <div className="cover-container">
                 <img className="cover" src={essay.header} alt={essay.header} />
+                <div className="essay-title-container">
+                    <p className="essay-title">{essay.title}</p>
+                    <p className="essay-subtitle">{essay.subtitle}</p>
+                </div>
             </div>
             <div className="photo-essay-wrapper">
-                <p className="essay-title">{essay.title}</p>
-                <p className="essay-subtitle">{essay.subtitle}</p>
                 {essay.photos.map((row: string[], i: number) => (
                     <PhotoRow
                         photos={row}
