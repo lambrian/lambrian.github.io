@@ -26,7 +26,6 @@ export const PHOTO_ESSAYS: Array<EssayConfig> = [
                 '/img/south-america/DSC01682.jpg',
             ],
             [
-                '/img/south-america/DSC01696.jpg',
                 '/img/south-america/2024-11-14 18.23.20.jpg',
                 '/img/south-america/2024-11-14 18.50.42.jpg',
             ],
