@@ -111,17 +111,23 @@ body ::selection {
     position: absolute;
     z-index: 2;
     bottom: 0;
-    left: 20px;
+    left: 0;
     color: white;
+    width: 80%;
+    padding: 20px;
+    overflow: hidden;
 }
 
+:root {
+    --essay-title: 2vw;
+}
 .essay-title {
-    font-size: 72px;
     font-weight: 500;
     margin: 0;
     letter-spacing: 10px;
     text-transform: uppercase;
     width: 100%;
+    font-size: clamp(24px, 10vw, 72px);
 }
 
 .essay-subtitle {
