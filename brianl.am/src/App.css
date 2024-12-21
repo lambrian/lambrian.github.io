@@ -164,9 +164,11 @@ body ::selection {
 }
 
 .handwave {
-    animation: wave infinite 6s;
+    animation: wave infinite 6s 2s;
     display: inline-block;
+    translate: 5px -5px;
 }
+
 @keyframes wave {
     /* Beginning */
     0% {
