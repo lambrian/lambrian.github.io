@@ -222,6 +222,7 @@ body ::selection {
     opacity: 90%;
     width: 100%;
     height: 100%;
+    z-index: 3;
 }
 
 .lightbox img {
@@ -229,7 +230,7 @@ body ::selection {
     max-width: 90%;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    z-index: 3;
+    z-index: 4;
     cursor: none;
 }
 
@@ -240,5 +241,5 @@ img.opened {
 .lightbox.open {
     display: flex;
     opacity: 1;
-    z-index: 2;
+    z-index: 3;
 }
