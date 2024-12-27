@@ -1,6 +1,5 @@
 import React, {
     useState,
-    useRef,
     useMemo,
     SetStateAction,
     Dispatch,
@@ -10,6 +9,7 @@ import React, {
 import { useDimensions } from './useDimensions'
 import { useParams } from 'react-router-dom'
 import { PHOTO_ESSAYS } from './photo_essays'
+import { useInView } from 'react-intersection-observer'
 
 export type EssayConfig = {
     link: string
@@ -154,18 +154,24 @@ const PhotoRow = (props: {
     photos: string[]
     setLightboxFile: Dispatch<SetStateAction<string>>
 }) => {
-    const ref = useRef(null)
-    const [dimensions, setDimensions] = useState(new Map())
+    const [intersectionRef, inView] = useInView({ triggerOnce: true })
+    const [ref, setRef] = useState(null)
     const { width } = useDimensions(ref)
+    const [dimensions, setDimensions] = useState(new Map())
     const scaledDimensions = useMemo(
         () => calculatePhotoDimensions(props.photos, dimensions, width),
         [props, dimensions, width]
     )
 
+    const handleRef = (node: any) => {
+        setRef(node)
+        intersectionRef(node)
+    }
+
     return (
         <div
-            className={`photoset ${scaledDimensions ? 'loaded' : 'loading'}`}
-            ref={ref}
+            className={`photoset ${!scaledDimensions && 'loading'} ${!inView && 'hidden'}`}
+            ref={handleRef}
         >
             {props.photos.map((photo: string, i: number) => {
                 return (
