@@ -142,14 +142,17 @@ body ::selection {
     gap: 12px;
     align-self: stretch;
     flex-wrap: wrap;
-    transition: all 2s;
+    transition: all 1s;
 }
 
 .photoset.loading {
     height: 800px;
     overflow: hidden;
+}
+
+.photoset.hidden {
+    transform: translateY(20px);
     opacity: 0;
-    transform: translateY(10px);
 }
 
 .cover-container {
