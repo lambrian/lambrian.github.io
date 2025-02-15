@@ -7,7 +7,7 @@ dotenv.config()
 
 const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
 const QUEENS_URL = 'https://www.linkedin.com/games/queens'
-const START_BTN = '#ember18'
+const START_BTN = '#ember19'
 
 async function fetchTodayGame() {
     const url = QUEENS_URL
