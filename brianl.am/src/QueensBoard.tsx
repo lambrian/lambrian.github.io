@@ -29,6 +29,8 @@ interface CellProps {
     setDisplay: (index: number, newVal: number) => void
     isInvalid: boolean
     isWin: boolean
+    mouseState: boolean
+    setMouseState: (mouseState: boolean) => void
 }
 
 const getCellClasses = ({
@@ -89,6 +91,13 @@ const Cell = (props: CellProps) => {
         <div
             onClick={() => props.setDisplay(props.index, props.display + 1)}
             className={getCellClasses(props)}
+            onMouseDown={() => props.setMouseState(true)}
+            onMouseUp={() => props.setMouseState(false)}
+            onMouseEnter={() =>
+                props.mouseState &&
+                !props.display &&
+                props.setDisplay(props.index, 1)
+            }
         >
             <span className="content">{getDisplayState(props.display)}</span>
         </div>
@@ -328,6 +337,7 @@ const QueensBoardInner = (props: { board: number[] }) => {
     >([])
     const [invalidState, setInvalidState] = useState(new Set())
     const [showInvalidState, setShowInvalidState] = useState(false)
+    const [mouseState, setMouseState] = useState(false)
 
     const setDisplayStateImpl = useCallback(
         (index: number, newValRaw: number) => {
@@ -388,6 +398,8 @@ const QueensBoardInner = (props: { board: number[] }) => {
                             setDisplay={setDisplayStateImpl}
                             isInvalid={showInvalidState && invalidState.has(i)}
                             isWin={gameFinished}
+                            mouseState={mouseState}
+                            setMouseState={setMouseState}
                         ></Cell>
                     ))}
                 </div>
