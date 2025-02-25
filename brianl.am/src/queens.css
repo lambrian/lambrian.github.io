@@ -1,5 +1,5 @@
 :root {
-    --cell-border: 1px solid black;
+    --cell-border: 0.75px solid black;
 }
 .game-container {
     display: flex;
@@ -164,18 +164,15 @@
 }
 
 .color-0 {
-    --cell-color: #ffd765;
-    /* Vibrant Yellow */
+    --cell-color: #bba3e2;
 }
 
 .color-1 {
-    --cell-color: #6fc9f4;
-    /* Bright Sky Blue */
+    --cell-color: #ffc992;
 }
 
 .color-2 {
-    --cell-color: #77c682;
-    /* Lively Soft Green */
+    --cell-color: #96beff;
 }
 
 .color-3 {
@@ -184,83 +181,55 @@
 }
 
 .color-4 {
-    --cell-color: #ff7bf0;
-    /* Bright Red-Pink */
+    --cell-color: #b3dfa0;
 }
 
 .color-5 {
-    --cell-color: #c078d9;
-    /* Rich Lavender Purple */
+    --cell-color: #dfdfdf;
 }
 
 .color-6 {
-    --cell-color: #ffb94b;
-    /* Warm Orange */
+    --cell-color: #ff7b60;
 }
 
 .color-7 {
-    --cell-color: #787bd9;
-    /* Vivid Indigo */
+    --cell-color: #e6f388;
 }
 
 .color-8 {
-    --cell-color: #53d5d9;
-    /* Vibrant Teal */
+    --cell-color: #b9b29e;
 }
 
 .color-9 {
-    --cell-color: #a6d95b;
-    /* Fresh Olive Green */
+    --cell-color: #dfa0bf;
 }
 
 .color-10 {
-    --cell-color: #ffa6c1;
-    /* Playful Pink */
+    --cell-color: #a3d2d8;
 }
 
 .color-11 {
-    --cell-color: #8cd977;
-    /* Bright Mint Green */
+    --cell-color: #62efea;
 }
 
 .color-12 {
-    --cell-color: #ffbf86;
-    /* Soft Peach */
+    --cell-color: #ff93f3;
 }
 
 .color-13 {
-    --cell-color: #b485e5;
-    /* Deep Lavender Purple */
+    --cell-color: #8acc6d;
 }
 
 .color-14 {
-    --cell-color: #ffac7a;
-    /* Coral Peach */
+    --cell-color: #729aec;
 }
 
 .color-15 {
-    --cell-color: #70d3e5;
-    /* Aqua Blue */
+    --cell-color: #c387e0;
 }
 
 .color-16 {
-    --cell-color: #fff05c;
-    /* Bright Cream Yellow */
-}
-
-.color-17 {
-    --cell-color: #85a8ff;
-    /* Soft Baby Blue */
-}
-
-.color-18 {
-    --cell-color: #e18a8c;
-    /* Rose Red */
-}
-
-.color-19 {
-    --cell-color: #ff97a4;
-    /* Soft Coral Pink */
+    --cell-color: #ffe04b;
 }
 
 .color-20 {
