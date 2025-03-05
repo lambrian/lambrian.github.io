@@ -12,7 +12,10 @@
 
 .chart-section {
     padding: 16px 20px;
-    border: 1px solid grey;
+}
+
+.chart-section:not(:last-child) {
+    border-bottom: 1px solid grey;
 }
 
 :root {
@@ -30,10 +33,10 @@
 }
 
 .section {
-    padding: 24px;
+    margin: 24px;
     display: flex;
     flex-direction: column;
-    row-gap: 12px;
+    border: 1px solid grey;
 }
 
 .section-title {
@@ -153,6 +156,14 @@
 
 .status-info {
     background-color: #2196f3;
+}
+
+.status-warning {
+    background-color: #FFC107;
+}
+
+.status-major {
+    background-color: #D32F2F;
 }
 
 .chart-metrics {
