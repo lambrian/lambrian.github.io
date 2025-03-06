@@ -26,6 +26,8 @@ async function main() {
         date: page?.properties.Date.formula.string,
         location:
             page?.properties?.Location?.select?.name || 'Needs Information',
+        drinks: page?.properties?.Drinks.number,
+        gym: page?.properties?.Gym.checkbox,
     }))
     result.reverse()
 
