@@ -8,7 +8,6 @@ dotenv.config()
 const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
 const QUEENS_URL = 'https://www.linkedin.com/games/queens'
 const START_BTN = '#launch-footer-start-button'
-const TUTORIAL_CLOSE_BUTTON = '#ember61'
 
 async function fetchTodayGame() {
     const url = QUEENS_URL
@@ -21,8 +20,6 @@ async function fetchTodayGame() {
         await iframe.waitForSelector('body')
         await iframe.waitForSelector(START_BTN)
         await iframe.click(START_BTN)
-        await iframe.waitForSelector(TUTORIAL_CLOSE_BUTTON)
-        await iframe.click(TUTORIAL_CLOSE_BUTTON)
         const grid = await iframe.$('#queens-grid')
         const cells = await grid?.evaluate((gridEl) => {
             const children = gridEl.children
