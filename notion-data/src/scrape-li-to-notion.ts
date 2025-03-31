@@ -7,20 +7,23 @@ dotenv.config()
 
 const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
 const QUEENS_URL = 'https://www.linkedin.com/games/queens'
-const START_BTN = '#ember19'
+const START_BTN = '#launch-footer-start-button'
+const TUTORIAL_CLOSE_BUTTON = '#ember61'
 
 async function fetchTodayGame() {
     const url = QUEENS_URL
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto(url, { waitUntil: 'networkidle2' })
+    await page.goto(url, { waitUntil: 'domcontentloaded' })
     const iframeElement = await page.waitForSelector('iframe')
     const iframe = await iframeElement?.contentFrame()
     if (iframe) {
         await iframe.waitForSelector('body')
-        const grid = await iframe.$('#queens-grid')
         await iframe.waitForSelector(START_BTN)
         await iframe.click(START_BTN)
+        await iframe.waitForSelector(TUTORIAL_CLOSE_BUTTON)
+        await iframe.click(TUTORIAL_CLOSE_BUTTON)
+        const grid = await iframe.$('#queens-grid')
         const cells = await grid?.evaluate((gridEl) => {
             const children = gridEl.children
             const cellColors: any[] = []
@@ -35,6 +38,7 @@ async function fetchTodayGame() {
             }
             return cellColors
         })
+        console.log(cells)
 
         console.log(JSON.stringify(cells))
         return cells
@@ -84,6 +88,7 @@ async function main() {
     }
 
     const cellColors = await fetchTodayGame()
+    console.log('cell colors', cellColors)
     if (!isBoardValid(cellColors)) {
         console.log('Fetched board is not valid.')
         return
