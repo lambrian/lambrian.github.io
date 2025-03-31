@@ -22,7 +22,7 @@ def compute_board_img_2(filename, side_length):
     array = np.array(im)
     section_width = int(len(array) / side_length)
     seen_prevalent_colors = defaultdict(int)
-    BUFFER = int(section_width * .05)
+    BUFFER = int(section_width * .07)
     sector_colors = []
     for row_i in range(side_length):
         for col_i in range(side_length):
