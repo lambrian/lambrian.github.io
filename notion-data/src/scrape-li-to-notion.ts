@@ -9,17 +9,24 @@ const QUEENS_DB_ID = '13c413f810be8070b6aedc3d1e0bb330'
 const QUEENS_URL = 'https://www.linkedin.com/games/queens'
 const START_BTN = '#launch-footer-start-button'
 
+async function clickButton(iframe: any, buttonSelector: string) {
+    await iframe
+        .waitForSelector(START_BTN, { timeout: 1000 })
+        .then(() => iframe.click(START_BTN))
+        .catch(() => console.log('Did not find', START_BTN))
+}
 async function fetchTodayGame() {
     const url = QUEENS_URL
-    const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch({ headless: true })
     const page = await browser.newPage()
     await page.goto(url, { waitUntil: 'domcontentloaded' })
     const iframeElement = await page.waitForSelector('iframe')
     const iframe = await iframeElement?.contentFrame()
     if (iframe) {
         await iframe.waitForSelector('body')
-        await iframe.waitForSelector(START_BTN)
-        await iframe.click(START_BTN)
+        await clickButton(iframe, START_BTN)
+        await clickButton(iframe, '#ember54')
+
         const grid = await iframe.$('#queens-grid')
         const cells = await grid?.evaluate((gridEl) => {
             const children = gridEl.children
@@ -35,9 +42,7 @@ async function fetchTodayGame() {
             }
             return cellColors
         })
-        console.log(cells)
 
-        console.log(JSON.stringify(cells))
         return cells
     }
 
@@ -56,14 +61,7 @@ const isBoardValid = (cellColors: any) => {
     )
 }
 
-async function main() {
-    // read json of output
-    // write back to notion
-    // fetch all dates
-    const notion = new Client({
-        auth: process.env.NOTION_TOKEN,
-    })
-
+async function checkHasTodayPage(notion: Client) {
     const response = await notion.databases.query({
         database_id: QUEENS_DB_ID,
         sorts: [
@@ -81,16 +79,16 @@ async function main() {
         .toFormat('yyyy-MM-dd')
     if (latestDate === todayDate) {
         console.log('Notion already has a row for today.')
-        return
+        return true
     }
 
-    const cellColors = await fetchTodayGame()
-    console.log('cell colors', cellColors)
-    if (!isBoardValid(cellColors)) {
-        console.log('Fetched board is not valid.')
-        return
-    }
+    return false
+}
 
+async function uploadBoard(notion: Client, cellColors: any[]) {
+    const todayDate = DateTime.local()
+        .setZone('America/Los_Angeles')
+        .toFormat('yyyy-MM-dd')
     await notion.pages.create({
         parent: {
             type: 'database_id',
@@ -103,6 +101,25 @@ async function main() {
             'Color Array': [{ text: { content: JSON.stringify(cellColors) } }],
         },
     })
+}
+
+async function main() {
+    const notion = new Client({
+        auth: process.env.NOTION_TOKEN,
+    })
+
+    if (await checkHasTodayPage(notion)) {
+        return
+    }
+
+    const cellColors = await fetchTodayGame()
+    console.log(cellColors)
+    if (!cellColors || !isBoardValid(cellColors)) {
+        console.log('Fetched board is not valid.')
+        return
+    }
+
+    await uploadBoard(notion, cellColors)
 }
 
 main()
