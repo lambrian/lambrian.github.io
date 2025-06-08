@@ -12,13 +12,21 @@ const CONFIG: DIGIT_CONFIG = {
         [12, 3],
         [9, 12],
     ],
-    1: [
+    10: [
         [9, 9],
         [6, 6],
         [9, 9],
         [12, 6],
         [9, 9],
         [12, 12],
+    ],
+    1: [
+        [6, 6],
+        [3, 3],
+        [12, 6],
+        [3, 3],
+        [12, 12],
+        [3, 3],
     ],
     2: [
         [3, 3],
@@ -120,7 +128,7 @@ export const ClockClock = () => {
     return (
         <div className="wrapper">
             <div className="display-clock">
-                <ClockNumber digit={digits[0]} />
+                <ClockNumber digit={digits[0] === 1 ? 10 : digits[0]} />
                 <ClockNumber digit={digits[1]} />
                 <ClockNumber digit={digits[2]} />
                 <ClockNumber digit={digits[3]} />

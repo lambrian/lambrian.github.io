@@ -17,7 +17,6 @@
         4,
         calc(calc(var(--clock-diam) + var(--clock-weight) * 2) * 2)
     );
-    gap: 8px;
 }
 
 .clock-number {
