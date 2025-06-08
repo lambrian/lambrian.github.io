@@ -1,0 +1,74 @@
+:root {
+    --clock-diam: 10vw;
+    --clock-weight: 0.5vw;
+    --hand-length: calc(var(--clock-diam) / 2 * 0.8);
+    --hand-width: 0.7vw;
+}
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8vh;
+}
+
+.display-clock {
+    display: grid;
+    grid-template-columns: repeat(
+        4,
+        calc(calc(var(--clock-diam) + var(--clock-weight) * 2) * 2)
+    );
+    gap: 8px;
+}
+
+.clock-number {
+    display: grid;
+    grid-template-columns: repeat(2, calc(var(--clock-diam)));
+    gap: 8px;
+}
+.clock {
+    width: var(--clock-diam);
+    height: var(--clock-diam);
+    border-radius: 50%;
+    border: var(--clock-weight) solid black;
+    position: relative;
+}
+
+.hour,
+.minute {
+    width: calc(var(--hand-length));
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: top left;
+    transition: transform 2s linear;
+}
+
+.hour::before,
+.minute::before {
+    content: '';
+    position: absolute;
+    border: var(--hand-width) solid black;
+    height: 0px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.position-6 {
+    transform: rotate(90deg);
+}
+
+.position-9 {
+    transform: rotate(180deg);
+}
+
+.position-12 {
+    transform: rotate(270deg);
+}
+
+.position-3::before,
+.position-6::before,
+.position-9::before,
+.position-12::before {
+    top: calc(-1 * var(--hand-width));
+}
