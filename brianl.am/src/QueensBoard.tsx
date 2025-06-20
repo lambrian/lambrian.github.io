@@ -87,8 +87,38 @@ const getCellClasses = ({
 }
 
 const Cell = (props: CellProps) => {
+    const [dragNextState, setDragNextState] = useState(2)
+    const onTouchStart = useCallback(() => {
+        // based on the current cell, set the drag next state or nothing
+        if (props.display === 2) {
+            setDragNextState(2)
+        } else {
+            setDragNextState((props.display + 1) % 2)
+        }
+    }, [props.display])
+    const onDrag = useCallback(
+        (e: React.TouchEvent<HTMLDivElement>) => {
+            if (dragNextState === 2) {
+                return
+            }
+
+            const touch = e.touches[0]
+            const element = document.elementFromPoint(
+                touch.clientX,
+                touch.clientY
+            )
+            const currIndexStr = element?.getAttribute('data-index')
+            if (currIndexStr) {
+                props.setDisplay(parseInt(currIndexStr), dragNextState)
+            }
+        },
+        [props, dragNextState]
+    )
     return (
         <div
+            data-index={props.index}
+            onTouchMove={onDrag}
+            onTouchStart={onTouchStart}
             onClick={() => props.setDisplay(props.index, props.display + 1)}
             className={getCellClasses(props)}
             onMouseDown={() => props.setMouseState(true)}
