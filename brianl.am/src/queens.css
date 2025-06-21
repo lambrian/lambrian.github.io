@@ -91,24 +91,25 @@
     align-items: center;
     justify-content: center;
     transition: border-width 2s ease 0s;
+    touch-action: none;
 }
 
-.ruled>* {
+.ruled > * {
     opacity: 100%;
     transition: opacity 0.5s ease 1s;
 }
 
-.cell-win.ruled>* {
+.cell-win.ruled > * {
     opacity: 0%;
 }
 
-.queen>* {
+.queen > * {
     transition:
         filter 2s ease 3s,
         transform 2s ease 5s;
 }
 
-.cell-win.queen>* {
+.cell-win.queen > * {
     animation: grow-shrink 1s ease-in 1s 2 alternate;
     transform: translateY(calc(-1 * var(--num-row) * (var(--cell-size) + 2px)));
 }
@@ -120,11 +121,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: repeating-linear-gradient(45deg,
-            var(--invalid-stripe),
-            var(--invalid-stripe) 4px,
-            var(--cell-color) 4px,
-            var(--cell-color) 8px);
+    background: repeating-linear-gradient(
+        45deg,
+        var(--invalid-stripe),
+        var(--invalid-stripe) 4px,
+        var(--cell-color) 4px,
+        var(--cell-color) 8px
+    );
 }
 
 .row-0 {
@@ -196,7 +199,6 @@
     --cell-color: #96beff;
     --cell-color: #ffc992;
     --cell-color: #bba3e2;
-
 }
 
 .color-0 {
@@ -319,7 +321,7 @@
     border: 2px solid rgba(255, 20, 0, 0.7);
 }
 
-.has-board>a:hover {
+.has-board > a:hover {
     color: white;
 }
 
@@ -346,8 +348,10 @@
 
 .grid-game-title {
     display: grid;
-    grid-template-columns: repeat(var(--title-pixel-side-count),
-            var(--title-pixel-size));
+    grid-template-columns: repeat(
+        var(--title-pixel-side-count),
+        var(--title-pixel-size)
+    );
     grid-template-rows: var(--title-pixel-side-count);
     gap: 1px;
     padding: 0 4px;
